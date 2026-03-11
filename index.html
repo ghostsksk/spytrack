@@ -2,9 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spytrack | Alta Performance em Gestão Local</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spytrack | Gestão Desktop Profissional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,125 +14,90 @@
     <header id="header">
         <nav class="container">
             <div class="logo"><span>SPY</span>TRACK</div>
-            
-            <ul class="nav-links">
-                <li><a href="#funcionalidades">Tecnologia</a></li>
-                <li><a href="#precos">Licenciamento</a></li>
-                <li><a href="#" class="btn-glass">Solicitar Licença</a></li>
-            </ul>
-
-            <button class="mobile-menu-btn" id="menuBtn">
-                <span></span>
-                <span></span>
+            <button class="menu-trigger" id="menuBtn">
+                <div class="bar"></div>
+                <div class="bar"></div>
             </button>
         </nav>
     </header>
 
-    <aside class="mobile-sidebar" id="sidebar">
-        <nav>
-            <a href="#funcionalidades" onclick="toggleMenu()">Tecnologia</a>
-            <a href="#precos" onclick="toggleMenu()">Licenciamento</a>
-            <a href="#" class="btn-primary">Adquirir Agora</a>
-        </nav>
-    </aside>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#funcionalidades" onclick="closeMenu()">Tecnologia</a>
+        <a href="#precos" onclick="closeMenu()">Licenciamento</a>
+        <a href="https://wa.me/seunumeroaqui" class="btn-cta">Adquirir Agora</a>
+    </div>
 
-    <main>
-        <section class="hero container">
-            <div class="hero-content">
-                <span class="badge">Arquitetura Desktop Nativa</span>
-                <h1>O poder da gestão <br> <span class="text-gradient">sem depender da internet</span></h1>
-                <p>Estabilidade absoluta para o seu negócio. Um sistema robusto, instalado localmente para quem não pode parar por lentidão de rede.</p>
-                <div class="hero-btns">
-                    <a href="#precos" class="btn-primary">Adquirir Licença Elite</a>
-                    <a href="#funcionalidades" class="btn-secondary">Explorar Módulos</a>
+    <main class="container">
+        <section class="hero">
+            <span class="badge-mobile">Arquitetura Nativa Windows</span>
+            <h1>Gestão Local <br><span class="text-gradient">Sem Internet</span></h1>
+            <p>Estabilidade absoluta. O Spytrack é instalado no seu computador, garantindo que sua loja nunca pare.</p>
+            <div class="hero-actions">
+                <a href="#precos" class="btn-main">Assinar Licença</a>
+            </div>
+        </section>
+
+        <section id="funcionalidades" class="features">
+            <h2 class="section-title">Engenharia de Elite</h2>
+            
+            <div class="card">
+                <div class="card-icon">01</div>
+                <h3>Terminal PDV Local</h3>
+                <p>Resposta em milissegundos. Venda sem lags mesmo se o mundo ficar sem conexão.</p>
+                <div class="card-img">
+                    <img src="1.png" alt="PDV">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">02</div>
+                <h3>Estoque Blindado</h3>
+                <p>Cálculo de lucro real e custo médio processados localmente com segurança total.</p>
+                <div class="card-img">
+                    <img src="3.png" alt="Estoque">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">03</div>
+                <h3>Crediário Nativo</h3>
+                <p>Controle de recebíveis e limites de crédito sem depender de servidores externos.</p>
+                <div class="card-img">
+                    <img src="2.png" alt="Crediário">
                 </div>
             </div>
         </section>
 
-        <section id="funcionalidades" class="container showcase">
-            <div class="section-header">
-                <h2>Engenharia de Alto Nível</h2>
-                <p>Desenvolvido para máxima performance em hardware local.</p>
-            </div>
-
-            <div class="product-grid">
-                <article class="product-item">
-                    <div class="product-info">
-                        <div class="step-number">01</div>
-                        <h3>Terminal de Venda Local</h3>
-                        <p>Resposta imediata em milissegundos. Nosso PDV nativo ignora oscilações de conexão, garantindo que seu caixa opere com 100% de disponibilidade.</p>
-                    </div>
-                    <div class="product-image">
-                        <img src="1.png" alt="Terminal Desktop">
-                    </div>
-                </article>
-
-                <article class="product-item reverse">
-                    <div class="product-info">
-                        <div class="step-number">02</div>
-                        <h3>Estoque de Precisão</h3>
-                        <p>Inteligência de inventário que processa dados offline. Visualize margem de lucro real e custo médio com a segurança de um banco de dados local.</p>
-                    </div>
-                    <div class="product-image">
-                        <img src="3.png" alt="Módulo de Estoque">
-                    </div>
-                </article>
-
-                <article class="product-item">
-                    <div class="product-info">
-                        <div class="step-number">03</div>
-                        <h3>Crediário Blindado</h3>
-                        <p>Controle financeiro rigoroso. Gerencie históricos, vencimentos e limites de crédito com total privacidade e velocidade industrial.</p>
-                    </div>
-                    <div class="product-image">
-                        <img src="2.png" alt="Módulo Financeiro">
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="precos" class="pricing container">
-            <div class="price-glass-card">
-                <div class="price-header">
-                    <h3>Licença de Uso Profissional</h3>
-                    <div class="price-value">R$ 80<span>/mês</span></div>
-                </div>
-                <ul class="price-list">
-                    <li>Instalação local em Windows</li>
-                    <li>Banco de dados ultra-rápido</li>
-                    <li>Operação 100% independente de internet</li>
-                    <li>Usuários e Terminais ilimitados</li>
-                    <li>Suporte especializado via WhatsApp</li>
+        <section id="precos" class="pricing">
+            <div class="price-card">
+                <small>PLANO EMPRESARIAL</small>
+                <div class="amount">R$ 80<span>/mês</span></div>
+                <ul class="check-list">
+                    <li>Instalação Local (Windows)</li>
+                    <li>Banco de Dados Ultra-Rápido</li>
+                    <li>Terminais Ilimitados</li>
+                    <li>Suporte WhatsApp</li>
                 </ul>
-                <a href="#" class="btn-primary full-width">Adquirir Sistema Elite</a>
+                <a href="#" class="btn-main full">Ativar Licença Agora</a>
             </div>
         </section>
     </main>
 
-    <footer class="container">
-        <p>© 2026 Spytrack Systems | Engenharia de Software Local.</p>
-    </footer>
-
     <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const sidebar = document.getElementById('sidebar');
+        const btn = document.getElementById('menuBtn');
+        const nav = document.getElementById('mobileNav');
+        
+        btn.onclick = () => {
+            btn.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+        };
 
-        function toggleMenu() {
-            menuBtn.classList.toggle('active');
-            sidebar.classList.toggle('active');
-            document.body.classList.toggle('no-scroll');
+        function closeMenu() {
+            btn.classList.remove('active');
+            nav.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
-
-        menuBtn.addEventListener('click', toggleMenu);
-
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
     </script>
 </body>
 </html>
