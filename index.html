@@ -12,7 +12,14 @@
     <header>
         <nav class="container">
             <div class="logo">SPYTRACK</div>
-            <ul>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu">
                 <li><a href="#funcionalidades">Funcionalidades</a></li>
                 <li><a href="#precos">Preços</a></li>
                 <li><a href="#" class="btn-nav">Teste Grátis</a></li>
@@ -39,7 +46,8 @@
                     <p>Interface limpa para vendas em segundos. Suporte a múltiplas formas de pagamento e fechamento de caixa simplificado.</p>
                 </div>
                 <div class="product-image">
-                    <img src="1.png" alt="Screenshot do PDV"> </div>
+                    <img src="1.png" alt="PDV">
+                </div>
             </div>
 
             <div class="product-item reverse">
@@ -49,7 +57,7 @@
                     <p>Visualize seu lucro real, custo médio e receba alertas automáticos de itens esgotados.</p>
                 </div>
                 <div class="product-image">
-                    <img src="3.png" alt="Screenshot do Estoque">
+                    <img src="3.png" alt="Estoque">
                 </div>
             </div>
 
@@ -60,18 +68,7 @@
                     <p>Gerencie parcelas, datas de vencimento e histórico de pagamentos dos seus clientes de forma automática.</p>
                 </div>
                 <div class="product-image">
-                    <img src="2.png" alt="Screenshot do Crediário">
-                </div>
-            </div>
-
-            <div class="product-item reverse">
-                <div class="product-info">
-                    <span class="badge">Segurança</span>
-                    <h3>Clientes e Usuários</h3>
-                    <p>Cadastros detalhados com níveis de permissão para administradores e operadores, garantindo total segurança dos dados.</p>
-                </div>
-                <div class="product-image">
-                    <img src="4.png" alt="Screenshot de Cadastros">
+                    <img src="2.png" alt="Crediário">
                 </div>
             </div>
         </div>
@@ -98,5 +95,22 @@
         <p>&copy; 2026 Spytrack. Tecnologia para quem decide.</p>
     </footer>
 
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('is-active');
+        });
+
+        // Fecha o menu ao clicar em um link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('is-active');
+            });
+        });
+    </script>
 </body>
 </html>
