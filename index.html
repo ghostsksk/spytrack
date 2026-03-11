@@ -3,113 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spytrack | Gestão Inteligente</title>
+    <title>Spytrack | Alta Performance em Gestão Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <nav class="container">
-            <div class="logo">SPYTRACK</div>
-            
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <div class="bg-glow"></div>
 
-            <ul class="nav-menu">
-                <li><a href="#funcionalidades">Funcionalidades</a></li>
-                <li><a href="#precos">Preços</a></li>
-                <li><a href="#" class="btn-nav">Teste Grátis</a></li>
+    <header id="header">
+        <nav class="container">
+            <div class="logo"><span>SPY</span>TRACK</div>
+            
+            <ul class="nav-links">
+                <li><a href="#funcionalidades">Tecnologia</a></li>
+                <li><a href="#precos">Licenciamento</a></li>
+                <li><a href="#" class="btn-glass">Solicitar Licença</a></li>
             </ul>
+
+            <button class="mobile-menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Controle seu negócio de forma <span>invisível e eficiente</span></h1>
-            <p>O PDV completo para quem busca simplicidade no caixa e inteligência estratégica no estoque.</p>
-            <a href="#" class="btn-primary">Começar agora</a>
-        </div>
-    </section>
+    <aside class="mobile-sidebar" id="sidebar">
+        <nav>
+            <a href="#funcionalidades" onclick="toggleMenu()">Tecnologia</a>
+            <a href="#precos" onclick="toggleMenu()">Licenciamento</a>
+            <a href="#" class="btn-primary">Adquirir Agora</a>
+        </nav>
+    </aside>
 
-    <section id="funcionalidades" class="showcase container">
-        <h2 class="section-title">Conheça o ecossistema Spytrack</h2>
-        
-        <div class="product-grid">
-            <div class="product-item">
-                <div class="product-info">
-                    <span class="badge">Agilidade</span>
-                    <h3>PDV de Alta Performance</h3>
-                    <p>Interface limpa para vendas em segundos. Suporte a múltiplas formas de pagamento e fechamento de caixa simplificado.</p>
-                </div>
-                <div class="product-image">
-                    <img src="1.png" alt="PDV">
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <span class="badge">Arquitetura Desktop Nativa</span>
+                <h1>O poder da gestão <br> <span class="text-gradient">sem depender da internet</span></h1>
+                <p>Estabilidade absoluta para o seu negócio. Um sistema robusto, instalado localmente para quem não pode parar por lentidão de rede.</p>
+                <div class="hero-btns">
+                    <a href="#precos" class="btn-primary">Adquirir Licença Elite</a>
+                    <a href="#funcionalidades" class="btn-secondary">Explorar Módulos</a>
                 </div>
             </div>
+        </section>
 
-            <div class="product-item reverse">
-                <div class="product-info">
-                    <span class="badge">Controle</span>
-                    <h3>Gestão de Estoque</h3>
-                    <p>Visualize seu lucro real, custo médio e receba alertas automáticos de itens esgotados.</p>
-                </div>
-                <div class="product-image">
-                    <img src="3.png" alt="Estoque">
-                </div>
+        <section id="funcionalidades" class="container showcase">
+            <div class="section-header">
+                <h2>Engenharia de Alto Nível</h2>
+                <p>Desenvolvido para máxima performance em hardware local.</p>
             </div>
 
-            <div class="product-item">
-                <div class="product-info">
-                    <span class="badge">Financeiro</span>
-                    <h3>Crediário Integrado</h3>
-                    <p>Gerencie parcelas, datas de vencimento e histórico de pagamentos dos seus clientes de forma automática.</p>
-                </div>
-                <div class="product-image">
-                    <img src="2.png" alt="Crediário">
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="product-grid">
+                <article class="product-item">
+                    <div class="product-info">
+                        <div class="step-number">01</div>
+                        <h3>Terminal de Venda Local</h3>
+                        <p>Resposta imediata em milissegundos. Nosso PDV nativo ignora oscilações de conexão, garantindo que seu caixa opere com 100% de disponibilidade.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="1.png" alt="Terminal Desktop">
+                    </div>
+                </article>
 
-    <section id="precos" class="pricing">
-        <div class="container">
-            <h2>Plano Único e Transparente</h2>
-            <div class="price-box">
-                <span class="plan-label">Acesso Total</span>
-                <div class="price">R$ 80<span>/mês</span></div>
-                <ul>
-                    <li>PDV (Caixa) Ilimitado</li>
-                    <li>Gestão de Estoque e Lucratividade</li>
-                    <li>Múltiplos Usuários e Permissões</li>
-                    <li>Suporte Prioritário via WhatsApp</li>
+                <article class="product-item reverse">
+                    <div class="product-info">
+                        <div class="step-number">02</div>
+                        <h3>Estoque de Precisão</h3>
+                        <p>Inteligência de inventário que processa dados offline. Visualize margem de lucro real e custo médio com a segurança de um banco de dados local.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="3.png" alt="Módulo de Estoque">
+                    </div>
+                </article>
+
+                <article class="product-item">
+                    <div class="product-info">
+                        <div class="step-number">03</div>
+                        <h3>Crediário Blindado</h3>
+                        <p>Controle financeiro rigoroso. Gerencie históricos, vencimentos e limites de crédito com total privacidade e velocidade industrial.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="2.png" alt="Módulo Financeiro">
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="precos" class="pricing container">
+            <div class="price-glass-card">
+                <div class="price-header">
+                    <h3>Licença de Uso Profissional</h3>
+                    <div class="price-value">R$ 80<span>/mês</span></div>
+                </div>
+                <ul class="price-list">
+                    <li>Instalação local em Windows</li>
+                    <li>Banco de dados ultra-rápido</li>
+                    <li>Operação 100% independente de internet</li>
+                    <li>Usuários e Terminais ilimitados</li>
+                    <li>Suporte especializado via WhatsApp</li>
                 </ul>
-                <a href="#" class="btn-primary" style="width: 100%;">Assinar Agora</a>
+                <a href="#" class="btn-primary full-width">Adquirir Sistema Elite</a>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer>
-        <p>&copy; 2026 Spytrack. Tecnologia para quem decide.</p>
+    <footer class="container">
+        <p>© 2026 Spytrack Systems | Engenharia de Software Local.</p>
     </footer>
 
     <script>
-        const menuToggle = document.getElementById('mobile-menu');
-        const navMenu = document.querySelector('.nav-menu');
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('is-active');
-        });
+        function toggleMenu() {
+            menuBtn.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        }
 
-        // Fecha o menu ao clicar em um link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('is-active');
-            });
+        menuBtn.addEventListener('click', toggleMenu);
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
     </script>
 </body>
