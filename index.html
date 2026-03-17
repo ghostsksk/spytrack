@@ -2,9 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spytrack | Gestão Desktop Profissional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spytrack | Alta Performance em Gestão Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,76 +12,102 @@
     <div class="bg-glow"></div>
 
     <header id="header">
-        <nav class="container">
+        <nav class="container nav-wrapper">
             <div class="logo"><span>SPY</span>TRACK</div>
-            <button class="menu-trigger" id="menuBtn">
-                <div class="bar"></div>
-                <div class="bar"></div>
+            <div class="desktop-menu">
+                <a href="#tecnologia">Tecnologia</a>
+                <a href="#precos">Licenciamento</a>
+                <a href="https://wa.me/seunumeroaqui" class="btn-nav">Falar com Consultor</a>
+            </div>
+            <button class="menu-trigger" id="menuBtn" aria-label="Abrir Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
             </button>
         </nav>
     </header>
 
     <div class="mobile-nav" id="mobileNav">
-        <a href="#funcionalidades" onclick="closeMenu()">Tecnologia</a>
+        <a href="#tecnologia" onclick="closeMenu()">Tecnologia</a>
         <a href="#precos" onclick="closeMenu()">Licenciamento</a>
-        <a href="https://wa.me/seunumeroaqui" class="btn-cta">Adquirir Agora</a>
+        <a href="https://wa.me/seunumeroaqui" class="btn-cta-mobile">Começar Agora</a>
     </div>
 
-    <main class="container">
-        <section class="hero">
-            <span class="badge-mobile">Arquitetura Nativa Windows</span>
-            <h1>Gestão Local <br><span class="text-gradient">Sem Internet</span></h1>
-            <p>Estabilidade absoluta. O Spytrack é instalado no seu computador, garantindo que sua loja nunca pare.</p>
-            <div class="hero-actions">
-                <a href="#precos" class="btn-main">Assinar Licença</a>
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <span class="badge">Offline-First Technology</span>
+                <h1>A potência do Desktop. <br><span class="text-gradient">A liberdade do Offline.</span></h1>
+                <p>O Spytrack elimina a dependência de internet. Instalação nativa Windows para uma gestão sem interrupções, latência zero e segurança total dos seus dados.</p>
+                <div class="hero-actions">
+                    <a href="#precos" class="btn-primary">Ver Planos de Licença</a>
+                    <a href="#tecnologia" class="btn-secondary">Conhecer a Tecnologia</a>
+                </div>
             </div>
         </section>
 
-        <section id="funcionalidades" class="features">
-            <h2 class="section-title">Engenharia de Elite</h2>
+        <section id="tecnologia" class="features container">
+            <div class="section-header">
+                <h2 class="section-title">Engenharia de Elite</h2>
+                <p>Desenvolvido para empresas que não podem parar por instabilidades de rede.</p>
+            </div>
             
-            <div class="card">
-                <div class="card-icon">01</div>
-                <h3>Terminal PDV Local</h3>
-                <p>Resposta em milissegundos. Venda sem lags mesmo se o mundo ficar sem conexão.</p>
-                <div class="card-img">
-                    <img src="1.png" alt="PDV">
-                </div>
-            </div>
+            <div class="grid-features">
+                <article class="card">
+                    <div class="card-header">
+                        <span class="card-number">01</span>
+                        <h3>PDV Ultrarrápido</h3>
+                    </div>
+                    <p>Processamento local em milissegundos. Realize vendas e emita cupons sem depender da nuvem.</p>
+                    <div class="card-tag">Latência Zero</div>
+                </article>
 
-            <div class="card">
-                <div class="card-icon">02</div>
-                <h3>Estoque Blindado</h3>
-                <p>Cálculo de lucro real e custo médio processados localmente com segurança total.</p>
-                <div class="card-img">
-                    <img src="3.png" alt="Estoque">
-                </div>
-            </div>
+                <article class="card">
+                    <div class="card-header">
+                        <span class="card-number">02</span>
+                        <h3>Estoque Inteligente</h3>
+                    </div>
+                    <p>Controle de entrada, saída e custo médio com banco de dados indexado localmente.</p>
+                    <div class="card-tag">Dados Blindados</div>
+                </article>
 
-            <div class="card">
-                <div class="card-icon">03</div>
-                <h3>Crediário Nativo</h3>
-                <p>Controle de recebíveis e limites de crédito sem depender de servidores externos.</p>
-                <div class="card-img">
-                    <img src="2.png" alt="Crediário">
-                </div>
+                <article class="card">
+                    <div class="card-header">
+                        <span class="card-number">03</span>
+                        <h3>Crediário e Finanças</h3>
+                    </div>
+                    <p>Gestão completa de recebíveis e histórico de clientes com backup automático e seguro.</p>
+                    <div class="card-tag">Gestão Nativa</div>
+                </article>
             </div>
         </section>
 
-        <section id="precos" class="pricing">
-            <div class="price-card">
-                <small>PLANO EMPRESARIAL</small>
-                <div class="amount">R$ 80<span>/mês</span></div>
-                <ul class="check-list">
-                    <li>Instalação Local (Windows)</li>
-                    <li>Banco de Dados Ultra-Rápido</li>
-                    <li>Terminais Ilimitados</li>
-                    <li>Suporte WhatsApp</li>
-                </ul>
-                <a href="#" class="btn-main full">Ativar Licença Agora</a>
+        <section id="precos" class="pricing container">
+            <div class="pricing-box">
+                <div class="pricing-info">
+                    <h2>Licenciamento Profissional</h2>
+                    <p>Toda a tecnologia Spytrack liberada para sua empresa.</p>
+                </div>
+                <div class="price-card">
+                    <div class="price-header">
+                        <small>MENSALIDADE</small>
+                        <div class="amount">R$ 80<span class="period">/mês</span></div>
+                    </div>
+                    <ul class="check-list">
+                        <li>Instalação Nativa (Windows 10/11)</li>
+                        <li>Terminais Ilimitados na mesma rede</li>
+                        <li>Banco de Dados SQL de alta performance</li>
+                        <li>Suporte prioritário via WhatsApp</li>
+                    </ul>
+                    <a href="#" class="btn-primary full">Ativar Minha Licença</a>
+                    <p class="price-footer">Sem taxas de adesão ou cancelamento.</p>
+                </div>
             </div>
         </section>
     </main>
+
+    <footer class="container">
+        <p>&copy; 2026 Spytrack</p>
+    </footer>
 
     <script>
         const btn = document.getElementById('menuBtn');
@@ -90,13 +116,13 @@
         btn.onclick = () => {
             btn.classList.toggle('active');
             nav.classList.toggle('active');
-            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+            document.body.classList.toggle('no-scroll');
         };
 
         function closeMenu() {
             btn.classList.remove('active');
             nav.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            document.body.classList.remove('no-scroll');
         }
     </script>
 </body>
