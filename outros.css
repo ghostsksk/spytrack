@@ -1,0 +1,181 @@
+/* --- Variáveis Spytrack (Mantendo a Identidade) --- */
+:root {
+    --bg-dark: #020617;
+    --bg-card: hsla(217, 33%, 17%, 0.5);
+    --primary: #3b82f6;
+    --primary-glow: rgba(59, 130, 246, 0.5);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Reset & Base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Background Estilizado --- */
+.bg-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 80% 20%, #1e293b 0%, transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Header --- */
+header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
+.logo span { color: var(--primary); }
+.logo a { text-decoration: none; color: inherit; }
+
+.desktop-menu { display: flex; gap: 2rem; align-items: center; }
+.desktop-menu a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+.desktop-menu a:hover { color: var(--text-main); }
+
+/* --- Hero Section --- */
+.hero { padding: 80px 0 40px; text-align: center; }
+h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 1.5rem; }
+.text-gradient { 
+    background: var(--accent-gradient); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+/* --- Grid de Serviços --- */
+.section-header { text-align: center; margin-bottom: 3rem; }
+.grid-features { 
+    display: grid; 
+    gap: 1.5rem; 
+    margin-top: 2rem; 
+}
+
+.card {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.card-number { color: var(--primary); font-weight: 800; opacity: 0.6; }
+.card-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(59, 130, 246, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* --- Seção de Orçamento (Pricing) --- */
+.pricing-box {
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 24px;
+    padding: 3rem;
+    margin: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.price-card {
+    background: rgba(2, 6, 23, 0.6);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.amount { font-size: 2.5rem; font-weight: 800; margin: 10px 0; color: var(--text-main); }
+
+.check-list { list-style: none; margin: 20px 0; }
+.check-list li { margin-bottom: 10px; color: var(--text-dim); }
+.check-list li::before { content: "→ "; color: var(--primary); }
+
+/* --- Botões --- */
+.btn-primary, .btn-nav {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary:hover { opacity: 0.9; transform: scale(1.02); }
+.btn-primary.full { width: 100%; }
+
+/* --- Footer --- */
+footer { padding: 40px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); color: var(--text-dim); }
+
+/* --- Responsividade --- */
+@media (min-width: 768px) {
+    h1 { font-size: 3.5rem; }
+    .grid-features { grid-template-columns: repeat(3, 1fr); }
+    .pricing-box { flex-direction: row; align-items: center; justify-content: space-between; }
+    .pricing-info { flex: 1; }
+    .price-card { flex: 1; max-width: 400px; }
+}

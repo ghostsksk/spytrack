@@ -1,7 +1,7 @@
 /* --- Variáveis e Reset --- */
 :root {
     --bg-dark: #020617;
-    --bg-card: rgba(30, 41, 59, 0.5);
+    --bg-card: hsla(217, 33%, 17%, 0.5);
     --primary: #3b82f6;
     --primary-glow: rgba(59, 130, 246, 0.5);
     --text-main: #f8fafc;
