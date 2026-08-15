@@ -1,131 +1,658 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spytrack | Alta Performance em Gestão Local</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spytrack | Desenvolvimento Web & Tray</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- VARIÁVEIS GLOBAIS --- */
+    :root {
+      --primary: #0F172A;
+      --accent: #2563EB;
+      --accent-hover: #1D4ED8;
+      --cta-green: #10B981;
+      --code-purple: #7C3AED;
+      --text-main: #334155;
+      --text-muted: #64748B;
+      --bg-light: #F8FAFC;
+      --bg-white: #FFFFFF;
+      --border: #E2E8F0;
+      --radius: 8px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-white);
+      color: var(--text-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* --- HEADER & MENU MOBILE --- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: box-shadow 0.3s ease;
+    }
+
+    header.scrolled {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-container {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .logo span.code-tag {
+      color: var(--code-purple);
+      font-family: 'Fira Code', monospace;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary);
+      transition: transform 0.2s ease;
+    }
+
+    .menu-toggle:active {
+      transform: scale(0.9);
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      padding: 1rem;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border);
+      list-style: none;
+    }
+
+    .nav-links.active {
+      display: flex;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: block;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #FFF !important;
+      padding: 0.75rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600 !important;
+      text-align: center;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      padding: 3rem 1rem 2.5rem;
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #F3E8FF;
+      color: var(--code-purple);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border: 1px solid #E9D5FF;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .hero h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .typing-text {
+      border-right: 2px solid var(--accent);
+      white-space: nowrap;
+      animation: blink 0.75s step-end infinite;
+    }
+
+    .hero p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .btn-secondary {
+      background-color: #FFF;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-light);
+      transform: translateY(-2px);
+    }
+
+    /* --- TECH STACK BANNER --- */
+    .tech-stack {
+      padding: 1.5rem 1rem;
+      background: var(--bg-light);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .tech-stack p {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.8rem;
+    }
+
+    .tech-tags {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .tech-pill {
+      background: #FFF;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--primary);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tech-pill:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    /* --- SERVIÇOS --- */
+    .services {
+      padding: 3rem 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .grid-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--code-purple);
+      background: #F3E8FF;
+      width: fit-content;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-list {
+      list-style: none;
+    }
+
+    .card-list li {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-list li::before {
+      content: "›";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* --- CTA CONTATO --- */
+    .cta-section {
+      background-color: var(--primary);
+      color: #FFF;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-section p {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-green {
+      background-color: var(--cta-green);
+      color: #FFF;
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-green:hover {
+      background-color: #059669;
+      transform: scale(1.02);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* --- CLASSES DE ANIMAÇÃO JS --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--accent); }
+    }
+
+    /* --- MEDIA QUERIES (DESKTOP) --- */
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.2rem 2rem;
+      }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        width: auto;
+        padding: 0;
+        border: none;
+        align-items: center;
+        gap: 2rem;
+        animation: none;
+      }
+
+      .hero {
+        padding: 5rem 2rem;
+      }
+
+      .hero-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .hero-actions {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .grid-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .services {
+        padding: 5rem 2rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+
+      .cta-section {
+        padding: 5rem 2rem;
+      }
+
+      .cta-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .btn-green {
+        display: inline-block;
+        width: auto;
+        padding: 0.9rem 2rem;
+      }
+    }
+  </style>
 </head>
-<body id="home">
+<body>
 
-    <div class="bg-glow"></div>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="nav-container">
+      <a href="#" class="logo"><span class="code-tag">&lt;/&gt;</span> SPYTRACK</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
+    </div>
+    
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#servicos" class="nav-item">Desenvolvimento</a></li>
+      <li><a href="#plataformas" class="nav-item">Lojas Tray</a></li>
+      <li><a href="#orcamento" class="btn-primary nav-item">Solicitar Orçamento</a></li>
+    </ul>
+  </header>
 
-    <header id="header">
-        <nav class="container nav-wrapper">
-            <div class="logo"><span>SPY</span>TRACK</div>
-            
-            <div class="desktop-menu">
-                <a href="#tecnologia">Tecnologia</a>
-                <a href="#precos">Licenciamento</a>
-                <a href="./sites.html" class="btn-nav">Outros Serviços</a>
-            </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container reveal">
+      <span class="badge">&lt;Software House & Web Development /&gt;</span>
+      <h1>Engenharia Web para <br><span id="typewriter" class="typing-text"></span></h1>
+      <p>Desenvolvemos sites institucionais nativos em HTML5/CSS3 de alta performance e implementamos e-commerces completos na plataforma Tray.</p>
+      <div class="hero-actions">
+        <a href="#orcamento" class="btn-primary">Criar Meu Projeto</a>
+        <a href="#servicos" class="btn-secondary">Ver Soluções Web</a>
+      </div>
+    </div>
+  </section>
 
-            <button class="menu-trigger" id="menuBtn" aria-label="Abrir Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </nav>
-    </header>
+  <!-- TECH STACK -->
+  <div class="tech-stack reveal">
+    <p>Tecnologias & Plataformas</p>
+    <div class="tech-tags">
+      <span class="tech-pill">Tray E-commerce</span>
+      <span class="tech-pill">HTML5 & CSS3</span>
+      <span class="tech-pill">JavaScript</span>
+      <span class="tech-pill">SEO & Performance</span>
+    </div>
+  </div>
 
-    <div class="mobile-nav" id="mobileNav">
-        <a href="#tecnologia" onclick="closeMenu()">Tecnologia</a>
-        <a href="#precos" onclick="closeMenu()">Licenciamento</a>
-        <a href="./sites.html" class="btn-cta-mobile">Outros Serviços</a>
+  <!-- SERVIÇOS -->
+  <section class="services" id="servicos">
+    <div class="section-title reveal">
+      <h2>Soluções Web</h2>
+      <p>Escolha o formato ideal para o seu negócio.</p>
     </div>
 
-    <main>
-        <section class="hero container">
-            <div class="hero-content">
-        
-                <h1>A potência do Desktop. <br><span class="text-gradient">A liberdade do Offline.</span></h1>
-                <p>O Spytrack elimina a dependência de internet. Instalação nativa Windows para uma gestão sem interrupções, latência zero e segurança total dos seus dados.</p>
-                <div class="hero-actions">
-                    <a href="#precos" class="btn-primary">Ver Planos de Licença</a>
-                    <a href="#tecnologia" class="btn-secondary">Conhecer a Tecnologia</a>
-                </div>
-            </div>
-        </section>
+    <div class="grid-cards">
+      <div class="card reveal">
+        <div class="card-tag">HTML5 / CSS3 / JS</div>
+        <h3>Sites & Landing Pages</h3>
+        <p>Desenvolvimento nativo sem construtores lentos. Páginas ultrarrápidas focadas em conversão.</p>
+        <ul class="card-list">
+          <li>Código limpo e otimizado</li>
+          <li>Design 100% responsivo</li>
+          <li>Otimizado para o Google</li>
+        </ul>
+      </div>
 
-        <section id="tecnologia" class="features container">
-            <div class="section-header">
-                <h2 class="section-title">Engenharia de Elite</h2>
-                <p>Desenvolvido para empresas que não podem parar por instabilidades de rede.</p>
-            </div>
-            
-            <div class="grid-features">
-                <article class="card">
-                    <div class="card-header">
-                        <span class="card-number">01</span>
-                        <h3>PDV Ultrarrápido</h3>
-                    </div>
-                    <p>Processamento local em milissegundos. Realize vendas e emita cupons sem depender da nuvem.</p>
-                    <div class="card-tag">Latência Zero</div>
-                </article>
+      <div class="card reveal" id="plataformas">
+        <div class="card-tag">Tray / E-commerce</div>
+        <h3>Lojas Virtuais Tray</h3>
+        <p>Criação e personalização de e-commerces na plataforma Tray. Ajustes avançados via código.</p>
+        <ul class="card-list">
+          <li>Layout personalizado sob medida</li>
+          <li>Configuração de catálogo e checkout</li>
+          <li>Ajustes focados em conversão</li>
+        </ul>
+      </div>
 
-                <article class="card">
-                    <div class="card-header">
-                        <span class="card-number">02</span>
-                        <h3>Estoque Inteligente</h3>
-                    </div>
-                    <p>Controle de entrada, saída e custo médio com banco de dados indexado localmente.</p>
-                    <div class="card-tag">Dados Blindados</div>
-                </article>
+      <div class="card reveal">
+        <div class="card-tag">Manutenção & APIs</div>
+        <h3>Ajustes & Suporte Web</h3>
+        <p>Manutenção técnica, refatoração de código e melhorias contínuas para a sua loja ou site.</p>
+        <ul class="card-list">
+          <li>Correção de erros e bugs</li>
+          <li>Instalação de pixels e scripts</li>
+          <li>Melhoria de performance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-                <article class="card">
-                    <div class="card-header">
-                        <span class="card-number">03</span>
-                        <h3>Crediário e Finanças</h3>
-                    </div>
-                    <p>Gestão completa de recebíveis e histórico de clientes com backup automático e seguro.</p>
-                    <div class="card-tag">Gestão Nativa</div>
-                </article>
-            </div>
-        </section>
+  <!-- CTA FINAL -->
+  <section class="cta-section" id="orcamento">
+    <div class="cta-container reveal">
+      <h2>Pronto para começar?</h2>
+      <p>Fale diretamente com o desenvolvedor e receba uma proposta para o seu projeto.</p>
+      <a href="https://wa.me/seunumero" class="btn-green">Chamar no WhatsApp</a>
+    </div>
+  </section>
 
-        <section id="precos" class="pricing container">
-            <div class="pricing-box">
-                <div class="pricing-info">
-                    <h2>Licenciamento Profissional</h2>
-                    <p>Toda a tecnologia Spytrack liberada para sua empresa.</p>
-                </div>
-                <div class="price-card">
-                    <div class="price-header">
-                        <small>MENSALIDADE</small>
-                        <div class="amount">R$ 80<span class="period">/mês</span></div>
-                    </div>
-                    <ul class="check-list">
-                        <li>Instalação Nativa (Windows 10/11)</li>
-                        <li>Terminais Ilimitados na mesma rede</li>
-                        <li>Banco de Dados SQL de alta performance</li>
-                        <li>Suporte prioritário via WhatsApp</li>
-                    </ul>
-                    <a href="#" class="btn-primary full">Ativar Minha Licença</a>
-                    <p class="price-footer">Sem taxas de adesão ou cancelamento.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+  <footer>
+    <p>© Spytrack — Desenvolvimento e Soluções Digitais.</p>
+  </footer>
 
-    <footer class="container">
-        <p>&copy; 2026 Spytrack</p>
-    </footer>
+  <!-- JAVASCRIPT DE INTERATIVIDADE E ANIMAÇÕES -->
+  <script>
+    // 1. Menu Mobile Toggle & Fechamento Automático ao Clicar em Link
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navItems = document.querySelectorAll('.nav-item');
 
-    <script>
-        const btn = document.getElementById('menuBtn');
-        const nav = document.getElementById('mobileNav');
-        
-        btn.onclick = () => {
-            btn.classList.toggle('active');
-            nav.classList.toggle('active');
-            document.body.classList.toggle('no-scroll');
-        };
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
 
-        function closeMenu() {
-            btn.classList.remove('active');
-            nav.classList.remove('active');
-            document.body.classList.remove('no-scroll');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          menuToggle.textContent = '☰';
         }
-    </script>
+      });
+    });
+
+    // 2. Animação do Header ao Rolar (Sticky Shadow)
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 3. Efeito Digitação (Typewriter) no Título Hero
+    const words = ["escalar suas vendas.", "destacar sua marca.", "criar seu e-commerce."];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeSpeed = 100;
+    const deleteSpeed = 50;
+    const delayBetweenWords = 1800;
+    const targetElement = document.getElementById('typewriter');
+
+    function typeEffect() {
+      const currentWord = words[wordIndex];
+      
+      if (isDeleting) {
+        targetElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        targetElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, delayBetweenWords);
+        return;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+      }
+
+      const currentSpeed = isDeleting ? deleteSpeed : typeSpeed;
+      setTimeout(typeEffect, currentSpeed);
+    }
+
+    document.addEventListener('DOMContentLoaded', typeEffect);
+
+    // 4. Animação de Entrada dos Elementos ao Rolar (Scroll Reveal via IntersectionObserver)
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
