@@ -1,663 +1,260 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!-- META TAGS BÁSICAS -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spytrack | Desenvolvimento Web & Tray</title>
+  <title>Spytrack | Desenvolvimento Web & Lojas Tray Otimizadas</title>
+  <meta name="description" content="Criação de sites nativos de alta performance em HTML5/CSS3 e desenvolvimento de lojas virtuais personalizadas na plataforma Tray. Solicite seu orçamento!">
+  <meta name="keywords" content="Spytrack, desenvolvimento web, e-commerce Tray, loja virtual Tray, sites responsivos, HTML5, CSS3, JavaScript, otimização de performance">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Spytrack">
+  <link rel="canonical" href="https://www.spytrack.com.br/">
+
+  <!-- OPEN GRAPH (FACEBOOK, LINKEDIN, WHATSAPP) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.spytrack.com.br/">
+  <meta property="og:title" content="Spytrack | Desenvolvimento Web & Lojas Tray">
+  <meta property="og:description" content="Engenharia web de alta performance e implementação de e-commerces completos na plataforma Tray.">
+  <meta property="og:image" content="https://www.spytrack.com.br/assets/og-image.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Spytrack">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.spytrack.com.br/">
+  <meta name="twitter:title" content="Spytrack | Desenvolvimento Web & Lojas Tray">
+  <meta name="twitter:description" content="Engenharia web de alta performance e implementação de e-commerces completos na plataforma Tray.">
+  <meta name="twitter:image" content="https://www.spytrack.com.br/assets/og-image.jpg">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- PRECONNECT & FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    /* --- VARIÁVEIS GLOBAIS --- */
-    :root {
-      --primary: #0F172A;
-      --accent: #2563EB;
-      --accent-hover: #1D4ED8;
-      --cta-green: #10B981;
-      --code-purple: #7C3AED;
-      --text-main: #334155;
-      --text-muted: #64748B;
-      --bg-light: #F8FAFC;
-      --bg-white: #FFFFFF;
-      --border: #E2E8F0;
-      --radius: 8px;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
+  <link rel="stylesheet" href="style.css">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-white);
-      color: var(--text-main);
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
-
-    /* --- ESTILOS BASE (MOBILE-FIRST) --- */
-    header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: box-shadow 0.3s ease;
-    }
-
-    header.scrolled {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .nav-container {
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .logo span.code-tag {
-      color: var(--code-purple);
-      font-family: 'Fira Code', monospace;
-    }
-
-    .menu-toggle {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      padding: 1rem;
-      background: var(--bg-white);
-      border-bottom: 1px solid var(--border);
-      list-style: none;
-    }
-
-    .nav-links.active {
-      display: flex;
-      animation: fadeIn 0.3s ease forwards;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 500;
-      font-size: 0.95rem;
-      display: block;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .btn-primary {
-      background-color: var(--accent);
-      color: #FFF !important;
-      padding: 0.75rem 1.2rem;
-      border-radius: var(--radius);
-      font-weight: 600 !important;
-      text-align: center;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--accent-hover);
-      transform: translateY(-2px);
-    }
-
-    /* --- HERO SECTION --- */
-    .hero {
-      padding: 3rem 1rem 2.5rem;
-      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
-      text-align: center;
-    }
-
-    .hero-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .badge {
-      display: inline-block;
-      background-color: #F3E8FF;
-      color: var(--code-purple);
-      padding: 0.3rem 0.8rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      border: 1px solid #E9D5FF;
-      font-family: 'Fira Code', monospace;
-    }
-
-    .hero h1 {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--primary);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .hero h1 span {
-      color: var(--accent);
-    }
-
-    .typing-text {
-      border-right: 2px solid var(--accent);
-      white-space: nowrap;
-      animation: blink 0.75s step-end infinite;
-    }
-
-    .hero p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .btn-secondary {
-      background-color: #FFF;
-      color: var(--primary);
-      border: 1px solid var(--border);
-      padding: 0.75rem 1.2rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      text-decoration: none;
-      text-align: center;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--bg-light);
-      transform: translateY(-2px);
-    }
-
-    /* --- TECH STACK --- */
-    .tech-stack {
-      padding: 1.5rem 1rem;
-      background: var(--bg-light);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .tech-stack p {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.8rem;
-    }
-
-    .tech-tags {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .tech-pill {
-      background: #FFF;
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.7rem;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: var(--primary);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .tech-pill:hover {
-      transform: scale(1.05);
-      border-color: var(--accent);
-    }
-
-    /* --- SERVIÇOS --- */
-    .services {
-      padding: 3rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-title h2 {
-      font-size: 1.5rem;
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-      font-size: 0.9rem;
-    }
-
-    .grid-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .card {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
-    }
-
-    .card-tag {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--code-purple);
-      background: #F3E8FF;
-      width: fit-content;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      margin-bottom: 0.75rem;
-    }
-
-    .card h3 {
-      font-size: 1.15rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      margin-bottom: 1rem;
-    }
-
-    .card-list {
-      list-style: none;
-    }
-
-    .card-list li {
-      font-size: 0.85rem;
-      color: var(--text-main);
-      margin-bottom: 0.3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .card-list li::before {
-      content: "›";
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    /* --- CTA CONTATO --- */
-    .cta-section {
-      background-color: var(--primary);
-      color: #FFF;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-
-    .cta-container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .cta-section h2 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 0.75rem;
-    }
-
-    .cta-section p {
-      color: #94A3B8;
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn-green {
-      background-color: var(--cta-green);
-      color: #FFF;
-      display: block;
-      width: 100%;
-      padding: 0.8rem;
-      border-radius: var(--radius);
-      font-weight: 700;
-      text-decoration: none;
-      text-align: center;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .btn-green:hover {
-      background-color: #059669;
-      transform: scale(1.02);
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.5rem 1rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    /* --- ANIMAÇÕES JS --- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes blink {
-      from, to { border-color: transparent; }
-      50% { border-color: var(--accent); }
-    }
-
-    /* ===================================================
-       MEDIA QUERIES — ADAPTAÇÃO PARA TABLETS E COMPUTADORES
-    =================================================== */
-
-    /* Computadores e Telas Grandes (768px em diante) */
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none; /* Oculta botão de hambúrguer */
+  <!-- DADOS ESTRUTURADOS (SCHEMA.ORG / JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Spytrack",
+    "url": "https://www.spytrack.com.br",
+    "logo": "https://www.spytrack.com.br/assets/logo.png",
+    "description": "Desenvolvimento de sites profissionais de alta performance e personalização de lojas e-commerce na plataforma Tray.",
+    "sameAs": [],
+    "areaServed": "BR",
+    "offers": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Desenvolvimento de Sites e Landing Pages"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Criação e Ajustes de Lojas Virtuais Tray"
+        }
       }
-
-      .nav-container {
-        padding: 1.2rem 2rem;
-      }
-
-      .nav-links {
-        display: flex !important; /* Exibe o menu estendido na horizontal */
-        flex-direction: row;
-        width: auto;
-        padding: 0;
-        border: none;
-        align-items: center;
-        gap: 2rem;
-        animation: none;
-      }
-
-      .hero {
-        padding: 6rem 2rem 5rem;
-      }
-
-      .hero h1 {
-        font-size: 3rem; /* Aumenta o tamanho da fonte no PC */
-      }
-
-      .hero p {
-        font-size: 1.15rem;
-      }
-
-      .hero-actions {
-        flex-direction: row; /* Coloca os botões lado a lado */
-        justify-content: center;
-      }
-
-      .grid-cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Organiza os 3 cartões em colunas no PC */
-        gap: 2rem;
-      }
-
-      .services {
-        padding: 6rem 2rem;
-      }
-
-      .section-title h2 {
-        font-size: 2.25rem;
-      }
-
-      .cta-section {
-        padding: 6rem 2rem;
-      }
-
-      .cta-section h2 {
-        font-size: 2.25rem;
-      }
-
-      .btn-green {
-        display: inline-block;
-        width: auto;
-        padding: 0.9rem 2.5rem;
-      }
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
 <body>
 
   <!-- HEADER -->
   <header id="header">
-    <div class="nav-container">
-      <a href="#" class="logo"><span class="code-tag">&lt;/&gt;</span> SPYTRACK</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
+    <nav class="nav-container" aria-label="Navegação principal">
+      <a href="#" class="logo" aria-label="Spytrack - Ir para a página inicial"><span class="code-tag" aria-hidden="true">&lt;/&gt;</span> SPYTRACK</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navLinks">☰</button>
       
       <ul class="nav-links" id="navLinks">
         <li><a href="#servicos" class="nav-item">Desenvolvimento</a></li>
         <li><a href="#plataformas" class="nav-item">Lojas Tray</a></li>
         <li><a href="#orcamento" class="btn-primary nav-item">Solicitar Orçamento</a></li>
       </ul>
-    </div>
+    </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-container reveal">
-      <span class="badge">&lt;Software House & Web Development /&gt;</span>
-      <h1>Engenharia Web para <br><span id="typewriter" class="typing-text"></span></h1>
-      <p>Desenvolvemos sites institucionais nativos em HTML5/CSS3 de alta performance e implementamos e-commerces completos na plataforma Tray.</p>
-      <div class="hero-actions">
-        <a href="#orcamento" class="btn-primary">Criar Meu Projeto</a>
-        <a href="#servicos" class="btn-secondary">Ver Soluções Web</a>
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-container reveal">
+        <span class="badge">&lt;Software House &amp; Web Development /&gt;</span>
+        <h1 id="hero-heading">Engenharia Web para <br><span id="typewriter" class="typing-text"></span></h1>
+        <p>Desenvolvemos sites institucionais nativos em HTML5/CSS3 de alta performance e implementamos e-commerces completos na plataforma Tray.</p>
+        <div class="hero-actions">
+          <a href="#orcamento" class="btn-primary">Criar Meu Projeto</a>
+          <a href="#servicos" class="btn-secondary">Ver Soluções Web</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TECH STACK -->
-  <div class="tech-stack reveal">
-    <p>Tecnologias & Plataformas</p>
-    <div class="tech-tags">
-      <span class="tech-pill">Tray E-commerce</span>
-      <span class="tech-pill">HTML5 & CSS3</span>
-      <span class="tech-pill">JavaScript</span>
-      <span class="tech-pill">SEO & Performance</span>
-    </div>
-  </div>
+    <!-- CARROSSEL CONTINUO (TICKER) COM ÍCONES COLORIDOS -->
+    <section class="tech-stack" aria-label="Tecnologias e Plataformas Utilizadas">
+      <h2>Tecnologias &amp; Plataformas</h2>
+      <div class="ticker-container">
+        <div class="ticker-track">
+          
+          <!-- PRIMEIRO BLOCO DE TAGS -->
+          <span class="tech-pill tray">
+            <svg viewBox="0 0 24 24" fill="#2D3282" role="img" aria-label="Ícone Tray E-commerce"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h6v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z"/></svg>
+            Tray E-commerce
+          </span>
 
-  <!-- SERVIÇOS -->
-  <section class="services" id="servicos">
-    <div class="section-title reveal">
-      <h2>Soluções Web</h2>
-      <p>Escolha o formato ideal para o seu negócio.</p>
-    </div>
+          <span class="tech-pill html-css">
+            <svg viewBox="0 0 24 24" fill="#E34F26" role="img" aria-label="Ícone HTML5 e CSS3"><path d="M12 1.75L3.5 4.5l1.2 13.5L12 21l7.3-3 1.2-13.5L12 1.75zm5.1 6.5h-8.8l.2 2.2h8.4l-.6 6.8-4.3 1.3-4.3-1.3-.3-3.1h2.2l.1 1.4 2.3.7 2.3-.7.3-3H6.8L6.1 4h11.3l-.3 4.25z"/></svg>
+            HTML5 &amp; CSS3
+          </span>
 
-    <div class="grid-cards">
-      <div class="card reveal">
-        <div class="card-tag">HTML5 / CSS3 / JS</div>
-        <h3>Sites & Landing Pages</h3>
-        <p>Desenvolvimento nativo sem construtores lentos. Páginas ultrarrápidas focadas em conversão.</p>
-        <ul class="card-list">
-          <li>Código limpo e otimizado</li>
-          <li>Design 100% responsivo</li>
-          <li>Otimizado para o Google</li>
-        </ul>
+          <span class="tech-pill js">
+            <svg viewBox="0 0 24 24" fill="#F7DF1E" role="img" aria-label="Ícone JavaScript"><path d="M3 3h18v18H3V3zm10.5 13.5c0-.8-.5-1.3-1.5-1.7l-.6-.2c-.6-.2-.9-.4-.9-.8 0-.4.3-.6.9-.6.7 0 1.2.3 1.5.8l1.3-.9c-.6-.9-1.5-1.4-2.8-1.4-1.7 0-2.7.9-2.7 2.2 0 1 .6 1.6 1.8 2.1l.6.2c.7.3.9.5.9.9 0 .5-.4.8-1.1.8-.9 0-1.5-.5-1.9-1.2l-1.3.9c.6 1.2 1.8 1.8 3.2 1.8 1.9.1 3-.9 3-2.5zm4.8 0c0-.8-.5-1.3-1.5-1.7l-.6-.2c-.6-.2-.9-.4-.9-.8 0-.4.3-.6.9-.6.7 0 1.2.3 1.5.8l1.3-.9c-.6-.9-1.5-1.4-2.8-1.4-1.7 0-2.7.9-2.7 2.2 0 1 .6 1.6 1.8 2.1l.6.2c.7.3.9.5.9.9 0 .5-.4.8-1.1.8-.9 0-1.5-.5-1.9-1.2l-1.3.9c.6 1.2 1.8 1.8 3.2 1.8 1.9.1 3-.9 3-2.5z"/></svg>
+            JavaScript
+          </span>
+
+          <span class="tech-pill seo">
+            <svg viewBox="0 0 24 24" fill="#10B981" role="img" aria-label="Ícone SEO"><path d="M12 2.5s-5.5 3.5-5.5 10c0 2.25.75 4.25 2 5.75L7 21.5l3.5-1c.5.15 1 .25 1.5.25s1-.1 1.5-.25l3.5 1-1.5-3.25c1.25-1.5 2-3.5 2-5.75 0-6.5-5.5-10-5.5-10zm0 8.5c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+            SEO &amp; Performance
+          </span>
+
+          <span class="tech-pill python">
+            <svg viewBox="0 0 24 24" fill="#3776AB" role="img" aria-label="Ícone Python"><path d="M12 2c-3.5 0-3.3 1.5-3.3 1.5v1.6h3.4v.5H7.2S5 5.4 5 8.8s1.9 3.3 1.9 3.3h1.1v-1.6c0-1.8 1.6-1.8 1.6-1.8h2.8c1.6 0 1.6-1.6 1.6-1.6V4.1S14.2 2 12 2zm-1.2 1.1c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zM12 22c3.5 0 3.3-1.5 3.3-1.5v-1.6h-3.4v-.5h4.9s2.2.2 2.2-3.2-1.9-3.3-1.9-3.3h-1.1v1.6c0 1.8-1.6 1.8-1.6 1.8h-2.8c-1.6 0-1.6 1.6-1.6 1.6v2.8s-.2 2.1 2 2.1zm1.2-1.1c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z"/></svg>
+            Python 3
+          </span>
+
+          <span class="tech-pill fastapi">
+            <svg viewBox="0 0 24 24" fill="#009688" role="img" aria-label="Ícone FastAPI"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+            FastAPI
+          </span>
+
+          <span class="tech-pill django">
+            <svg viewBox="0 0 24 24" fill="#092E20" role="img" aria-label="Ícone Django"><path d="M11.1 3v12.2c-1.2.1-2.1-.2-2.7-.8-.6-.6-.9-1.5-.9-2.7 0-1.2.3-2.1.9-2.7.6-.6 1.5-.9 2.7-.9V3zm3.8 0v18h-3.8v-2.8c-.6.9-1.3 1.6-2.1 2.1-.8.5-1.8.8-2.9.8-1.8 0-3.2-.6-4.2-1.7C1 18.3.5 16.7.5 14.7c0-2 .5-3.6 1.5-4.7 1-1.1 2.4-1.7 4.2-1.7 1.1 0 2.1.3 2.9.8.8.5 1.5 1.2 2.1 2.1V3h3.8z"/></svg>
+            Django
+          </span>
+
+          <span class="tech-pill mysql">
+            <svg viewBox="0 0 24 24" fill="#4479A1" role="img" aria-label="Ícone MySQL"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.3 6 2s-2.13 2-6 2-6-1.3-6-2 2.13-2 6-2zm0 14c-3.87 0-6-1.3-6-2v-2.21c1.54.8 3.67 1.21 6 1.21s4.46-.41 6-1.21V17c0 .7-2.13 2-6 2zm0-5c-3.87 0-6-1.3-6-2v-2.21c1.54.8 3.67 1.21 6 1.21s4.46-.41 6-1.21V12c0 .7-2.13 2-6 2z"/></svg>
+            MySQL
+          </span>
+
+          <span class="tech-pill postgres">
+            <svg viewBox="0 0 24 24" fill="#4169E1" role="img" aria-label="Ícone PostgreSQL"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            PostgreSQL
+          </span>
+
+          <!-- SEGUNDO BLOCO DUPLICADO PARA O EFEITO INFINITO -->
+          <span class="tech-pill tray" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#2D3282"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h6v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z"/></svg>
+            Tray E-commerce
+          </span>
+
+          <span class="tech-pill html-css" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#E34F26"><path d="M12 1.75L3.5 4.5l1.2 13.5L12 21l7.3-3 1.2-13.5L12 1.75zm5.1 6.5h-8.8l.2 2.2h8.4l-.6 6.8-4.3 1.3-4.3-1.3-.3-3.1h2.2l.1 1.4 2.3.7 2.3-.7.3-3H6.8L6.1 4h11.3l-.3 4.25z"/></svg>
+            HTML5 &amp; CSS3
+          </span>
+
+          <span class="tech-pill js" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#F7DF1E"><path d="M3 3h18v18H3V3zm10.5 13.5c0-.8-.5-1.3-1.5-1.7l-.6-.2c-.6-.2-.9-.4-.9-.8 0-.4.3-.6.9-.6.7 0 1.2.3 1.5.8l1.3-.9c-.6-.9-1.5-1.4-2.8-1.4-1.7 0-2.7.9-2.7 2.2 0 1 .6 1.6 1.8 2.1l.6.2c.7.3.9.5.9.9 0 .5-.4.8-1.1.8-.9 0-1.5-.5-1.9-1.2l-1.3.9c.6 1.2 1.8 1.8 3.2 1.8 1.9.1 3-.9 3-2.5zm4.8 0c0-.8-.5-1.3-1.5-1.7l-.6-.2c-.6-.2-.9-.4-.9-.8 0-.4.3-.6.9-.6.7 0 1.2.3 1.5.8l1.3-.9c-.6-.9-1.5-1.4-2.8-1.4-1.7 0-2.7.9-2.7 2.2 0 1 .6 1.6 1.8 2.1l.6.2c.7.3.9.5.9.9 0 .5-.4.8-1.1.8-.9 0-1.5-.5-1.9-1.2l-1.3.9c.6 1.2 1.8 1.8 3.2 1.8 1.9.1 3-.9 3-2.5z"/></svg>
+            JavaScript
+          </span>
+
+          <span class="tech-pill seo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#10B981"><path d="M12 2.5s-5.5 3.5-5.5 10c0 2.25.75 4.25 2 5.75L7 21.5l3.5-1c.5.15 1 .25 1.5.25s1-.1 1.5-.25l3.5 1-1.5-3.25c1.25-1.5 2-3.5 2-5.75 0-6.5-5.5-10-5.5-10zm0 8.5c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+            SEO &amp; Performance
+          </span>
+
+          <span class="tech-pill python" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#3776AB"><path d="M12 2c-3.5 0-3.3 1.5-3.3 1.5v1.6h3.4v.5H7.2S5 5.4 5 8.8s1.9 3.3 1.9 3.3h1.1v-1.6c0-1.8 1.6-1.8 1.6-1.8h2.8c1.6 0 1.6-1.6 1.6-1.6V4.1S14.2 2 12 2zm-1.2 1.1c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zM12 22c3.5 0 3.3-1.5 3.3-1.5v-1.6h-3.4v-.5h4.9s2.2.2 2.2-3.2-1.9-3.3-1.9-3.3h-1.1v1.6c0 1.8-1.6 1.8-1.6 1.8h-2.8c-1.6 0-1.6 1.6-1.6 1.6v2.8s-.2 2.1 2 2.1zm1.2-1.1c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z"/></svg>
+            Python 3
+          </span>
+
+          <span class="tech-pill fastapi" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#009688"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+            FastAPI
+          </span>
+
+          <span class="tech-pill django" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#092E20"><path d="M11.1 3v12.2c-1.2.1-2.1-.2-2.7-.8-.6-.6-.9-1.5-.9-2.7 0-1.2.3-2.1.9-2.7.6-.6 1.5-.9 2.7-.9V3zm3.8 0v18h-3.8v-2.8c-.6.9-1.3 1.6-2.1 2.1-.8.5-1.8.8-2.9.8-1.8 0-3.2-.6-4.2-1.7C1 18.3.5 16.7.5 14.7c0-2 .5-3.6 1.5-4.7 1-1.1 2.4-1.7 4.2-1.7 1.1 0 2.1.3 2.9.8.8.5 1.5 1.2 2.1 2.1V3h3.8z"/></svg>
+            Django
+          </span>
+
+          <span class="tech-pill mysql" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#4479A1"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.3 6 2s-2.13 2-6 2-6-1.3-6-2 2.13-2 6-2zm0 14c-3.87 0-6-1.3-6-2v-2.21c1.54.8 3.67 1.21 6 1.21s4.46-.41 6-1.21V17c0 .7-2.13 2-6 2zm0-5c-3.87 0-6-1.3-6-2v-2.21c1.54.8 3.67 1.21 6 1.21s4.46-.41 6-1.21V12c0 .7-2.13 2-6 2z"/></svg>
+            MySQL
+          </span>
+
+          <span class="tech-pill postgres" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#4169E1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            PostgreSQL
+          </span>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="services" id="servicos" aria-labelledby="services-heading">
+      <div class="section-title reveal">
+        <h2 id="services-heading">Soluções Web</h2>
+        <p>Escolha o formato ideal para o seu negócio.</p>
       </div>
 
-      <div class="card reveal" id="plataformas">
-        <div class="card-tag">Tray / E-commerce</div>
-        <h3>Lojas Virtuais Tray</h3>
-        <p>Criação e personalização de e-commerces na plataforma Tray. Ajustes avançados via código.</p>
-        <ul class="card-list">
-          <li>Layout personalizado sob medida</li>
-          <li>Configuração de catálogo e checkout</li>
-          <li>Ajustes focados em conversão</li>
-        </ul>
-      </div>
+      <div class="grid-cards">
+        <article class="card reveal">
+          <div class="card-tag">HTML5 / CSS3 / JS</div>
+          <h3>Sites &amp; Landing Pages</h3>
+          <p>Desenvolvimento nativo sem construtores lentos. Páginas ultrarrápidas focadas em conversão.</p>
+          <ul class="card-list">
+            <li>Código limpo e otimizado</li>
+            <li>Design 100% responsivo</li>
+            <li>Otimizado para o Google</li>
+          </ul>
+        </article>
 
-      <div class="card reveal">
-        <div class="card-tag">Manutenção & APIs</div>
-        <h3>Ajustes & Suporte Web</h3>
-        <p>Manutenção técnica, refatoração de código e melhorias contínuas para a sua loja ou site.</p>
-        <ul class="card-list">
-          <li>Correção de erros e bugs</li>
-          <li>Instalação de pixels e scripts</li>
-          <li>Melhoria de performance</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+        <article class="card reveal" id="plataformas">
+          <div class="card-tag">Tray / E-commerce</div>
+          <h3>Lojas Virtuais Tray</h3>
+          <p>Criação e personalização de e-commerces na plataforma Tray. Ajustes avançados via código.</p>
+          <ul class="card-list">
+            <li>Layout personalizado sob medida</li>
+            <li>Configuração de catálogo e checkout</li>
+            <li>Ajustes focados em conversão</li>
+          </ul>
+        </article>
 
-  <!-- CTA FINAL -->
-  <section class="cta-section" id="orcamento">
-    <div class="cta-container reveal">
-      <h2>Pronto para começar?</h2>
-      <p>Fale diretamente com o desenvolvedor e receba uma proposta para o seu projeto.</p>
-      <a href="https://wa.me/seunumero" class="btn-green">Chamar no WhatsApp</a>
-    </div>
-  </section>
+        <article class="card reveal">
+          <div class="card-tag">Manutenção &amp; APIs</div>
+          <h3>Ajustes &amp; Suporte Web</h3>
+          <p>Manutenção técnica, refatoração de código e melhorias contínuas para a sua loja ou site.</p>
+          <ul class="card-list">
+            <li>Correção de erros e bugs</li>
+            <li>Instalação de pixels e scripts</li>
+            <li>Melhoria de performance</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-section" id="orcamento" aria-labelledby="cta-heading">
+      <div class="cta-container reveal">
+        <h2 id="cta-heading">Pronto para começar?</h2>
+        <p>Fale diretamente com o desenvolvedor e receba uma proposta para o seu projeto.</p>
+        <a href="https://wa.me/seunumero" class="btn-green" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>© Spytrack — Desenvolvimento e Soluções Digitais.</p>
   </footer>
 
-  <script>
-    // Menu Mobile
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    const navItems = document.querySelectorAll('.nav-item');
-
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-    });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-          menuToggle.textContent = '☰';
-        }
-      });
-    });
-
-    // Sombra no Header
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Efeito de Digitação
-    const words = ["escalar suas vendas.", "destacar sua marca.", "criar seu e-commerce."];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typeSpeed = 100;
-    const deleteSpeed = 50;
-    const delayBetweenWords = 1800;
-    const targetElement = document.getElementById('typewriter');
-
-    function typeEffect() {
-      const currentWord = words[wordIndex];
-      
-      if (isDeleting) {
-        targetElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        targetElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-      }
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, delayBetweenWords);
-        return;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-      }
-
-      const currentSpeed = isDeleting ? deleteSpeed : typeSpeed;
-      setTimeout(typeEffect, currentSpeed);
-    }
-
-    document.addEventListener('DOMContentLoaded', typeEffect);
-
-    // Intersection Observer
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
-
-    revealElements.forEach(el => observer.observe(el));
-  </script>
-
+  <script src="script.js" defer></script>
 </body>
 </html>
