@@ -43,7 +43,7 @@
       overflow-x: hidden;
     }
 
-    /* --- HEADER & MENU MOBILE --- */
+    /* --- ESTILOS BASE (MOBILE-FIRST) --- */
     header {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
@@ -63,6 +63,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .logo {
@@ -86,11 +88,6 @@
       font-size: 1.5rem;
       cursor: pointer;
       color: var(--primary);
-      transition: transform 0.2s ease;
-    }
-
-    .menu-toggle:active {
-      transform: scale(0.9);
     }
 
     .nav-links {
@@ -142,6 +139,11 @@
       padding: 3rem 1rem 2.5rem;
       background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
       text-align: center;
+    }
+
+    .hero-container {
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .badge {
@@ -204,7 +206,7 @@
       transform: translateY(-2px);
     }
 
-    /* --- TECH STACK BANNER --- */
+    /* --- TECH STACK --- */
     .tech-stack {
       padding: 1.5rem 1rem;
       background: var(--bg-light);
@@ -227,6 +229,8 @@
       gap: 0.5rem;
       justify-content: center;
       flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .tech-pill {
@@ -248,6 +252,8 @@
     /* --- SERVIÇOS --- */
     .services {
       padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .section-title {
@@ -338,6 +344,11 @@
       text-align: center;
     }
 
+    .cta-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     .cta-section h2 {
       font-size: 1.5rem;
       font-weight: 800;
@@ -376,7 +387,7 @@
       font-size: 0.8rem;
     }
 
-    /* --- CLASSES DE ANIMAÇÃO JS --- */
+    /* --- ANIMAÇÕES JS --- */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -398,20 +409,22 @@
       50% { border-color: var(--accent); }
     }
 
-    /* --- MEDIA QUERIES (DESKTOP) --- */
+    /* ===================================================
+       MEDIA QUERIES — ADAPTAÇÃO PARA TABLETS E COMPUTADORES
+    =================================================== */
+
+    /* Computadores e Telas Grandes (768px em diante) */
     @media (min-width: 768px) {
       .menu-toggle {
-        display: none;
+        display: none; /* Oculta botão de hambúrguer */
       }
 
       .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
         padding: 1.2rem 2rem;
       }
 
       .nav-links {
-        display: flex !important;
+        display: flex !important; /* Exibe o menu estendido na horizontal */
         flex-direction: row;
         width: auto;
         padding: 0;
@@ -422,55 +435,48 @@
       }
 
       .hero {
-        padding: 5rem 2rem;
-      }
-
-      .hero-container {
-        max-width: 800px;
-        margin: 0 auto;
+        padding: 6rem 2rem 5rem;
       }
 
       .hero h1 {
-        font-size: 2.8rem;
+        font-size: 3rem; /* Aumenta o tamanho da fonte no PC */
       }
 
       .hero p {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
       }
 
       .hero-actions {
-        flex-direction: row;
+        flex-direction: row; /* Coloca os botões lado a lado */
         justify-content: center;
       }
 
       .grid-cards {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 1200px;
-        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr); /* Organiza os 3 cartões em colunas no PC */
+        gap: 2rem;
       }
 
       .services {
-        padding: 5rem 2rem;
+        padding: 6rem 2rem;
       }
 
       .section-title h2 {
-        font-size: 2.2rem;
+        font-size: 2.25rem;
       }
 
       .cta-section {
-        padding: 5rem 2rem;
+        padding: 6rem 2rem;
       }
 
-      .cta-container {
-        max-width: 600px;
-        margin: 0 auto;
+      .cta-section h2 {
+        font-size: 2.25rem;
       }
 
       .btn-green {
         display: inline-block;
         width: auto;
-        padding: 0.9rem 2rem;
+        padding: 0.9rem 2.5rem;
       }
     }
   </style>
@@ -482,13 +488,13 @@
     <div class="nav-container">
       <a href="#" class="logo"><span class="code-tag">&lt;/&gt;</span> SPYTRACK</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicos" class="nav-item">Desenvolvimento</a></li>
+        <li><a href="#plataformas" class="nav-item">Lojas Tray</a></li>
+        <li><a href="#orcamento" class="btn-primary nav-item">Solicitar Orçamento</a></li>
+      </ul>
     </div>
-    
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#servicos" class="nav-item">Desenvolvimento</a></li>
-      <li><a href="#plataformas" class="nav-item">Lojas Tray</a></li>
-      <li><a href="#orcamento" class="btn-primary nav-item">Solicitar Orçamento</a></li>
-    </ul>
   </header>
 
   <!-- HERO -->
@@ -571,9 +577,8 @@
     <p>© Spytrack — Desenvolvimento e Soluções Digitais.</p>
   </footer>
 
-  <!-- JAVASCRIPT DE INTERATIVIDADE E ANIMAÇÕES -->
   <script>
-    // 1. Menu Mobile Toggle & Fechamento Automático ao Clicar em Link
+    // Menu Mobile
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     const navItems = document.querySelectorAll('.nav-item');
@@ -592,7 +597,7 @@
       });
     });
 
-    // 2. Animação do Header ao Rolar (Sticky Shadow)
+    // Sombra no Header
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
@@ -602,7 +607,7 @@
       }
     });
 
-    // 3. Efeito Digitação (Typewriter) no Título Hero
+    // Efeito de Digitação
     const words = ["escalar suas vendas.", "destacar sua marca.", "criar seu e-commerce."];
     let wordIndex = 0;
     let charIndex = 0;
@@ -638,7 +643,7 @@
 
     document.addEventListener('DOMContentLoaded', typeEffect);
 
-    // 4. Animação de Entrada dos Elementos ao Rolar (Scroll Reveal via IntersectionObserver)
+    // Intersection Observer
     const revealElements = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries) => {
