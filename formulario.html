@@ -35,7 +35,21 @@
 
         main { flex: 1; max-width: 780px; width: 100%; margin: 48px auto; padding: 0 20px; }
         .hero-section { text-align: center; margin-bottom: 40px; }
-        .badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--purple-badge-bg); color: var(--purple-badge-text); font-family: 'Fira Code', monospace; font-size: 12px; font-weight: 600; padding: 8px 18px; border-radius: 30px; margin-bottom: 24px; border: 1px solid rgba(147, 51, 234, 0.2); }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--purple-badge-bg);
+            color: var(--purple-badge-text);
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(147, 51, 234, 0.2);
+        }
         
         .hero-title { font-size: 42px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.25; margin-bottom: 16px; }
         .hero-title span { color: var(--primary-blue); position: relative; }
@@ -173,7 +187,7 @@
                     <textarea id="detalhes" name="detalhes" class="form-textarea" rows="4" placeholder="Ex: Preciso de uma Landing Page rápida focada em captação de leads para anúncios..."></textarea>
                 </div>
 
-                <button type="submit" class="btn-submit">
+                <button type="submit" class="btn-submit" id="btnSubmit">
                     <span>Criar Meu Projeto</span>
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
@@ -206,7 +220,7 @@
     </footer>
 
     <script>
-        // Máscara WhatsApp
+        // Máscara de WhatsApp
         document.getElementById('whatsapp').addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 11) value = value.slice(0, 11);
@@ -216,7 +230,7 @@
             e.target.value = value;
         });
 
-        // Typing Effect
+        // Efeito de Digitação
         const words = ["escalar suas vendas.", "gerar mais leads.", "posicionar sua marca."];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
         const typedTextSpan = document.getElementById("typed-text");
@@ -233,17 +247,56 @@
         }
         document.addEventListener("DOMContentLoaded", typeEffect);
 
-        // Selection Cards
+        // Seleção de Cards
         function selectRadioCard(element) {
             document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
             element.querySelector('input[type="radio"]').checked = true;
         }
 
-        // Form Submission
-        function handleFormSubmit(event) {
+        // Integração via Fetch para a API FastAPI
+        async function handleFormSubmit(event) {
             event.preventDefault();
-            setTimeout(() => { document.getElementById('success-message').style.display = 'flex'; }, 600);
+
+            const btn = document.getElementById('btnSubmit');
+            const originalBtnContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.innerHTML = 'Enviando...';
+
+            // Coleta os dados do formulário
+            const payload = {
+                nome: document.getElementById('nome').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                empresa: document.getElementById('empresa').value || null,
+                tipo_projeto: document.querySelector('input[name="tipo_projeto"]:checked').value,
+                prazo: document.getElementById('prazo').value,
+                detalhes: document.getElementById('detalhes').value || null
+            };
+
+            try {
+                // Envio para o seu IP público
+                const response = await fetch('http://200.234.207.188:8000/api/leads', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    document.getElementById('success-message').style.display = 'flex';
+                } else {
+                    alert('Houve um erro ao processar seu pedido. Por favor, tente novamente.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Não foi possível conectar ao servidor. Verifique sua conexão.');
+            } finally {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.innerHTML = originalBtnContent;
+            }
         }
 
         function resetForm() {
