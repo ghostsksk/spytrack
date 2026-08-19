@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Orçamento | SPYTRACK — Engenharia Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #cbd5e1;
+            --border-focus: #2563eb;
+            --purple-badge-bg: #f3e8ff;
+            --purple-badge-text: #9333ea;
+            --focus-ring: rgba(37, 99, 235, 0.15);
+            --success-green: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+
+        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-color); padding: 20px 5%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; color: var(--text-dark); text-decoration: none; }
+        .logo-icon { color: var(--purple-badge-text); font-family: 'Fira Code', monospace; font-size: 24px; }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-link { text-decoration: none; color: var(--text-muted); font-size: 16px; font-weight: 500; }
+        .btn-header { background-color: var(--primary-blue); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+
+        main { flex: 1; max-width: 780px; width: 100%; margin: 48px auto; padding: 0 20px; }
+        .hero-section { text-align: center; margin-bottom: 40px; }
+        .badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--purple-badge-bg); color: var(--purple-badge-text); font-family: 'Fira Code', monospace; font-size: 14px; font-weight: 600; padding: 8px 18px; border-radius: 30px; margin-bottom: 24px; border: 1px solid rgba(147, 51, 234, 0.2); }
+        
+        .hero-title { font-size: 42px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.25; margin-bottom: 16px; }
+        .hero-title span { color: var(--primary-blue); position: relative; }
+        .typing-cursor { display: inline-block; width: 3px; height: 38px; background-color: var(--primary-blue); margin-left: 4px; vertical-align: middle; animation: blink 0.8s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .hero-subtitle { color: var(--text-muted); font-size: 18px; max-width: 620px; margin: 0 auto; }
+
+        .form-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 44px; box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.05); position: relative; }
+        .form-group { margin-bottom: 28px; }
+        .form-label { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+        .required-star { color: #ef4444; margin-left: 2px; }
+
+        .form-input, .form-select, .form-textarea { width: 100%; padding: 15px 18px; border: 1px solid var(--border-color); border-radius: 10px; font-size: 16px; outline: none; transition: all 0.25s; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 0 4px var(--focus-ring); }
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+
+        .radio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .radio-card { border: 2px solid var(--border-color); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all 0.2s; background-color: #fff; }
+        .radio-card:hover { border-color: var(--primary-blue); background-color: #f8fafc; transform: translateY(-2px); }
+        .radio-card.selected { border-color: var(--primary-blue); background-color: #eff6ff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); }
+        .radio-card input { accent-color: var(--primary-blue); width: 18px; height: 18px; }
+        .radio-card-title { font-size: 15px; font-weight: 600; }
+        .radio-card.selected .radio-card-title { color: var(--primary-blue); }
+
+        .btn-submit { width: 100%; background-color: var(--primary-blue); color: white; border: none; padding: 18px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.25s; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
+        .btn-submit:hover { background-color: var(--primary-blue-hover); transform: translateY(-2px); }
+
+        .guarantee-badge { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+
+        .tech-section { margin-top: 56px; text-align: center; }
+        .tech-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+        .tech-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .tech-pill { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 30px; padding: 10px 20px; font-size: 14px; font-weight: 600; transition: all 0.2s; }
+        .tech-pill:hover { border-color: var(--primary-blue); color: var(--primary-blue); transform: translateY(-2px); }
+
+        .success-overlay { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.98); border-radius: 20px; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; z-index: 10; }
+        .success-icon { width: 70px; height: 70px; background: #d1fae5; color: var(--success-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+
+        footer { text-align: center; padding: 28px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border-color); margin-top: 70px; background-color: var(--card-bg); }
+
+        @media (max-width: 768px) {
+            header { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hero-title { font-size: 30px; }
+            .hero-subtitle { font-size: 15px; }
+            .form-card { padding: 24px 18px; }
+            .form-row { flex-direction: column; gap: 0; }
+            .radio-grid { grid-template-columns: 1fr; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo"><span class="logo-icon">&lt;/&gt;</span> SPYTRACK</a>
+        <nav class="nav-links">
+            <a href="#" class="nav-link">Desenvolvimento</a>
+            <a href="#" class="nav-link">Lojas Tray</a>
+            <a href="#form-anchor" class="btn-header">Solicitar Orçamento</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="badge">&lt;Software House & Web Development /&gt;</div>
+            <h1 class="hero-title">Engenharia Web para<br><span id="typed-text"></span><span class="typing-cursor"></span></h1>
+            <p class="hero-subtitle">Preencha o formulário abaixo em 1 minuto e receba uma proposta técnica sob medida para o seu negócio.</p>
+        </section>
+
+        <div class="form-card" id="form-anchor">
+            
+            <div class="success-overlay" id="success-message">
+                <div class="success-icon">
+                    <svg width="36" height="36" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 8px;">Solicitação Enviada!</h2>
+                <p style="color: var(--text-muted); font-size: 16px; max-width: 400px; margin-bottom: 24px;">Analisaremos as informações do seu projeto e entraremos em contato via WhatsApp em até 2 horas úteis.</p>
+                <button onclick="resetForm()" style="background: var(--bg-light); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">Enviar nova resposta</button>
+            </div>
+
+            <form id="leadForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="nome">Seu Nome <span class="required-star">*</span></label>
+                        <input type="text" id="nome" name="nome" class="form-input" placeholder="Ex: João Silva" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="whatsapp">WhatsApp / Celular <span class="required-star">*</span></label>
+                        <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder="(00) 90000-0000" maxlength="15" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="empresa">Nome da Empresa / Projeto</label>
+                    <input type="text" id="empresa" name="empresa" class="form-input" placeholder="Ex: Minha Empresa Digital">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Qual a necessidade do seu projeto? <span class="required-star">*</span></label>
+                    <div class="radio-grid">
+                        <label class="radio-card selected" onclick="selectRadioCard(this)">
+                            <input type="radio" name="tipo_projeto" value="landing_page" checked>
+                            <span class="radio-card-title">Landing Page de Alta Performance</span>
+                        </label>
+                        <label class="radio-card" onclick="selectRadioCard(this)">
+                            <input type="radio" name="tipo_projeto" value="site_institucional">
+                            <span class="radio-card-title">Site Institucional Nativo</span>
+                        </label>
+                        <label class="radio-card" onclick="selectRadioCard(this)">
+                            <input type="radio" name="tipo_projeto" value="loja_tray">
+                            <span class="radio-card-title">E-commerce Completo (Tray)</span>
+                        </label>
+                        <label class="radio-card" onclick="selectRadioCard(this)">
+                            <input type="radio" name="tipo_projeto" value="outro">
+                            <span class="radio-card-title">Outro / Projeto Sob Medida</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="prazo">Qual a urgência da entrega? <span class="required-star">*</span></label>
+                    <select id="prazo" name="prazo" class="form-select" required>
+                        <option value="" disabled selected>Selecione o prazo ideal</option>
+                        <option value="urgente">⚡ Urgente (Até 5 dias úteis)</option>
+                        <option value="duas_semanas">📅 Próximas 2 semanas</option>
+                        <option value="um_mes">🗓️ No decorrer deste mês</option>
+                        <option value="planejamento">💡 Estou apenas planejando / pesquisando</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="detalhes">Conte um pouco sobre o seu projeto ou objetivo</label>
+                    <textarea id="detalhes" name="detalhes" class="form-textarea" rows="4" placeholder="Ex: Preciso de uma Landing Page rápida focada em captação de leads para anúncios..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <span>Criar Meu Projeto</span>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+
+                <div class="guarantee-badge">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span>🔒 Resposta rápida em até 2h úteis. Sem compromisso comercial.</span>
+                </div>
+            </form>
+        </div>
+
+        <section class="tech-section">
+            <h2 class="tech-title">Tecnologias & Plataformas de Alta Performance</h2>
+            <div class="tech-pills">
+                <span class="tech-pill">⚡ HTML5 / CSS3</span>
+                <span class="tech-pill">🚀 JavaScript (ES6+)</span>
+                <span class="tech-pill">📈 SEO & Performance</span>
+                <span class="tech-pill">🐍 Python 3</span>
+                <span class="tech-pill">⚡ FastAPI</span>
+                <span class="tech-pill">🎸 Django</span>
+                <span class="tech-pill">🐬 MySQL</span>
+                <span class="tech-pill">🐘 PostgreSQL</span>
+                <span class="tech-pill">🛍️ Tray E-commerce</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 SPYTRACK — Engenharia Web & Desenvolvimentos de Alta Performance.
+    </footer>
+
+    <script>
+        // Máscara WhatsApp
+        document.getElementById('whatsapp').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 6) value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+            else if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            else if (value.length > 0) value = `(${value}`;
+            e.target.value = value;
+        });
+
+        // Typing Effect
+        const words = ["escalar suas vendas.", "gerar mais leads.", "posicionar sua marca."];
+        let wordIndex = 0, charIndex = 0, isDeleting = false;
+        const typedTextSpan = document.getElementById("typed-text");
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            typedTextSpan.textContent = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentWord.length) { typeSpeed = 2000; isDeleting = true; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; }
+            setTimeout(typeEffect, typeSpeed);
+        }
+        document.addEventListener("DOMContentLoaded", typeEffect);
+
+        // Selection Cards
+        function selectRadioCard(element) {
+            document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+        }
+
+        // Form Submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            setTimeout(() => { document.getElementById('success-message').style.display = 'flex'; }, 600);
+        }
+
+        function resetForm() {
+            document.getElementById('leadForm').reset();
+            document.getElementById('success-message').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
