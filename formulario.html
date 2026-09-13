@@ -4,104 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitar Orçamento | SPYTRACK — Engenharia Web</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #2563eb;
-            --primary-blue-hover: #1d4ed8;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --bg-light: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #cbd5e1;
-            --border-focus: #2563eb;
-            --purple-badge-bg: #f3e8ff;
-            --purple-badge-text: #9333ea;
-            --focus-ring: rgba(37, 99, 235, 0.15);
-            --success-green: #10b981;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-
-        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-color); padding: 20px 5%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; color: var(--text-dark); text-decoration: none; }
-        .logo-icon { color: var(--purple-badge-text); font-family: 'Fira Code', monospace; font-size: 24px; }
-        .nav-links { display: flex; align-items: center; gap: 32px; }
-        .nav-link { text-decoration: none; color: var(--text-muted); font-size: 16px; font-weight: 500; }
-        .btn-header { background-color: var(--primary-blue); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
-
-        main { flex: 1; max-width: 780px; width: 100%; margin: 48px auto; padding: 0 20px; }
-        .hero-section { text-align: center; margin-bottom: 40px; }
-        
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: var(--purple-badge-bg);
-            color: var(--purple-badge-text);
-            font-family: 'Fira Code', monospace;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 30px;
-            margin-bottom: 18px;
-            border: 1px solid rgba(147, 51, 234, 0.2);
-        }
-        
-        .hero-title { font-size: 42px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.25; margin-bottom: 16px; }
-        .hero-title span { color: var(--primary-blue); position: relative; }
-        .typing-cursor { display: inline-block; width: 3px; height: 38px; background-color: var(--primary-blue); margin-left: 4px; vertical-align: middle; animation: blink 0.8s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .hero-subtitle { color: var(--text-muted); font-size: 18px; max-width: 620px; margin: 0 auto; }
-
-        .form-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 44px; box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.05); position: relative; }
-        .form-group { margin-bottom: 28px; }
-        .form-label { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 600; margin-bottom: 10px; }
-        .required-star { color: #ef4444; margin-left: 2px; }
-
-        .form-input, .form-select, .form-textarea { width: 100%; padding: 15px 18px; border: 1px solid var(--border-color); border-radius: 10px; font-size: 16px; outline: none; transition: all 0.25s; }
-        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 0 4px var(--focus-ring); }
-        .form-row { display: flex; gap: 20px; }
-        .form-row .form-group { flex: 1; }
-
-        .radio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-        .radio-card { border: 2px solid var(--border-color); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all 0.2s; background-color: #fff; }
-        .radio-card:hover { border-color: var(--primary-blue); background-color: #f8fafc; transform: translateY(-2px); }
-        .radio-card.selected { border-color: var(--primary-blue); background-color: #eff6ff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); }
-        .radio-card input { accent-color: var(--primary-blue); width: 18px; height: 18px; }
-        .radio-card-title { font-size: 15px; font-weight: 600; }
-        .radio-card.selected .radio-card-title { color: var(--primary-blue); }
-
-        .btn-submit { width: 100%; background-color: var(--primary-blue); color: white; border: none; padding: 18px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.25s; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
-        .btn-submit:hover { background-color: var(--primary-blue-hover); transform: translateY(-2px); }
-
-        .guarantee-badge { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
-
-        .tech-section { margin-top: 56px; text-align: center; }
-        .tech-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-        .tech-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-        .tech-pill { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 30px; padding: 10px 20px; font-size: 14px; font-weight: 600; transition: all 0.2s; }
-        .tech-pill:hover { border-color: var(--primary-blue); color: var(--primary-blue); transform: translateY(-2px); }
-
-        .success-overlay { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.98); border-radius: 20px; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; z-index: 10; }
-        .success-icon { width: 70px; height: 70px; background: #d1fae5; color: var(--success-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-
-        footer { text-align: center; padding: 28px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border-color); margin-top: 70px; background-color: var(--card-bg); }
-
-        @media (max-width: 768px) {
-            header { padding: 16px 20px; }
-            .nav-links { display: none; }
-            .hero-title { font-size: 30px; }
-            .hero-subtitle { font-size: 15px; }
-            .form-card { padding: 24px 18px; }
-            .form-row { flex-direction: column; gap: 0; }
-            .radio-grid { grid-template-columns: 1fr; gap: 10px; }
-        }
-    </style>
+    
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -219,90 +129,7 @@
         © Spytrack — Desenvolvimento e Soluções Digitais.
     </footer>
 
-    <script>
-        // Máscara de WhatsApp
-        document.getElementById('whatsapp').addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 11) value = value.slice(0, 11);
-            if (value.length > 6) value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-            else if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-            else if (value.length > 0) value = `(${value}`;
-            e.target.value = value;
-        });
-
-        // Efeito de Digitação
-        const words = ["escalar suas vendas.", "gerar mais leads.", "posicionar sua marca."];
-        let wordIndex = 0, charIndex = 0, isDeleting = false;
-        const typedTextSpan = document.getElementById("typed-text");
-
-        function typeEffect() {
-            const currentWord = words[wordIndex];
-            typedTextSpan.textContent = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
-            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
-            let typeSpeed = isDeleting ? 40 : 80;
-
-            if (!isDeleting && charIndex === currentWord.length) { typeSpeed = 2000; isDeleting = true; }
-            else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500; }
-            setTimeout(typeEffect, typeSpeed);
-        }
-        document.addEventListener("DOMContentLoaded", typeEffect);
-
-        // Seleção de Cards
-        function selectRadioCard(element) {
-            document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
-            element.classList.add('selected');
-            element.querySelector('input[type="radio"]').checked = true;
-        }
-
-        // Integração via Fetch para a API FastAPI
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-
-            const btn = document.getElementById('btnSubmit');
-            const originalBtnContent = btn.innerHTML;
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
-            btn.innerHTML = 'Enviando...';
-
-            // Coleta os dados do formulário
-            const payload = {
-                nome: document.getElementById('nome').value,
-                whatsapp: document.getElementById('whatsapp').value,
-                empresa: document.getElementById('empresa').value || null,
-                tipo_projeto: document.querySelector('input[name="tipo_projeto"]:checked').value,
-                prazo: document.getElementById('prazo').value,
-                detalhes: document.getElementById('detalhes').value || null
-            };
-
-            try {
-                // Envio para o seu IP público
-                const response = await fetch('https://spyjk.top/api/leads', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    document.getElementById('success-message').style.display = 'flex';
-                } else {
-                    alert('Houve um erro ao processar seu pedido. Por favor, tente novamente.');
-                }
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                alert('Não foi possível conectar ao servidor. Verifique sua conexão.');
-            } finally {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                btn.innerHTML = originalBtnContent;
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('leadForm').reset();
-            document.getElementById('success-message').style.display = 'none';
-        }
-    </script>
+    <!-- JS Externo -->
+    <script src="script.js"></script>
 </body>
 </html>
