@@ -1,361 +1,423 @@
+/* ==========================================================================
+   VARIÁVEIS VISUAIS NEO-BRUTALISM LIGHT
+   ========================================================================== */
 :root {
-    --primary-blue: #2563eb;
-    --primary-blue-hover: #1d4ed8;
-    --text-dark: #0f172a;
-    --text-muted: #64748b;
-    --bg-light: #f8fafc;
-    --card-bg: #ffffff;
-    --border-color: #cbd5e1;
-    --border-focus: #2563eb;
-    --purple-badge-bg: #f3e8ff;
-    --purple-badge-text: #9333ea;
-    --focus-ring: rgba(37, 99, 235, 0.15);
-    --success-green: #10b981;
+  --bg-main: #F4F4F6;
+  --card-white: #FFFFFF;
+  
+  --color-purple: #A78BFA;
+  --color-purple-dark: #8B5CF6;
+  --color-lime: #D9F99D;
+  --color-lime-dark: #A3E635;
+  --color-dark: #111827;
+  --color-muted: #6B7280;
+  
+  --border-stroke: #18181B;
+  --shadow-block: 4px 4px 0px #18181B;
+  --shadow-block-hover: 6px 6px 0px #18181B;
+
+  --radius-pill: 50px;
+  --radius-card: 20px;
+
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
 }
 
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Inter', -apple-system, sans-serif; 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body { 
-    background-color: var(--bg-light); 
-    color: var(--text-dark); 
-    line-height: 1.6; 
-    min-height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    overflow-x: hidden; 
+body {
+  background-color: var(--bg-main);
+  color: var(--color-dark);
+  font-family: var(--font-main);
+  overflow-x: hidden;
 }
 
-header { 
-    background-color: rgba(255, 255, 255, 0.95); 
-    backdrop-filter: blur(8px); 
-    border-bottom: 1px solid var(--border-color); 
-    padding: 20px 5%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    position: sticky; 
-    top: 0; 
-    z-index: 100; 
+/* ==========================================================================
+   HEADER / NAVBAR FLUTUANTE
+   ========================================================================== */
+.header-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.logo { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    font-weight: 800; 
-    font-size: 22px; 
-    color: var(--text-dark); 
-    text-decoration: none; 
+.nav-pill {
+  background: #E5E7EB;
+  border: 1.5px solid var(--border-stroke);
+  border-radius: var(--radius-pill);
+  padding: 8px 12px 8px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 2px 2px 0px var(--border-stroke);
 }
 
-.logo-icon { 
-    color: var(--purple-badge-text); 
-    font-family: 'Fira Code', monospace; 
-    font-size: 24px; 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-dark);
 }
 
-.nav-links { 
-    display: flex; 
-    align-items: center; 
-    gap: 32px; 
+.logo-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-purple-dark);
+  border-radius: 50%;
+  border: 1px solid var(--border-stroke);
 }
 
-.nav-link { 
-    text-decoration: none; 
-    color: var(--text-muted); 
-    font-size: 16px; 
-    font-weight: 500; 
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 8px;
 }
 
-.btn-header { 
-    background-color: var(--primary-blue); 
-    color: white; 
-    padding: 12px 24px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: 15px; 
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); 
+.nav-item {
+  text-decoration: none;
+  color: var(--color-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
 }
 
-main { 
-    flex: 1; 
-    max-width: 780px; 
-    width: 100%; 
-    margin: 48px auto; 
-    padding: 0 20px; 
+.nav-item:hover {
+  background-color: var(--color-purple);
+  color: #FFF;
 }
 
-.hero-section { 
-    text-align: center; 
-    margin-bottom: 40px; 
+.btn-pill-dark {
+  background-color: var(--color-dark);
+  color: #FFF;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1.5px solid var(--border-stroke);
+  transition: transform 0.2s ease;
 }
 
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: var(--purple-badge-bg);
-    color: var(--purple-badge-text);
-    font-family: 'Fira Code', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 30px;
-    margin-bottom: 18px;
-    border: 1px solid rgba(147, 51, 234, 0.2);
+.btn-pill-dark:hover {
+  transform: scale(1.03);
 }
 
-.hero-title { 
-    font-size: 42px; 
-    font-weight: 800; 
-    letter-spacing: -1.2px; 
-    line-height: 1.25; 
-    margin-bottom: 16px; 
+/* ==========================================================================
+   HERO SECTION FORMULÁRIO
+   ========================================================================== */
+.hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 40px auto 30px;
+  padding: 0 24px;
 }
 
-.hero-title span { 
-    color: var(--primary-blue); 
-    position: relative; 
+
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 16px;
 }
 
-.typing-cursor { 
-    display: inline-block; 
-    width: 3px; 
-    height: 38px; 
-    background-color: var(--primary-blue); 
-    margin-left: 4px; 
-    vertical-align: middle; 
-    animation: blink 0.8s infinite; 
+.highlight-purple {
+  background-color: var(--color-purple);
+  color: #FFF;
+  padding: 2px 10px;
+  border-radius: 8px;
 }
 
-@keyframes blink { 
-    0%, 100% { opacity: 1; } 
-    50% { opacity: 0; } 
+.typing-cursor {
+  animation: blink 0.8s infinite;
+  color: var(--color-purple-dark);
 }
 
-.hero-subtitle { 
-    color: var(--text-muted); 
-    font-size: 18px; 
-    max-width: 620px; 
-    margin: 0 auto; 
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.form-card { 
-    background: var(--card-bg); 
-    border: 1px solid var(--border-color); 
-    border-radius: 20px; 
-    padding: 44px; 
-    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.05); 
-    position: relative; 
+.hero-subtitle {
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
-.form-group { 
-    margin-bottom: 28px; 
+/* ==========================================================================
+   CARD DO FORMULÁRIO
+   ========================================================================== */
+.form-card {
+  max-width: 760px;
+  margin: 0 auto 60px;
+  background: var(--card-white);
+  border: 2px solid var(--border-stroke);
+  border-radius: var(--radius-card);
+  padding: 40px;
+  box-shadow: var(--shadow-block);
+  position: relative;
 }
 
-.form-label { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    font-size: 15px; 
-    font-weight: 600; 
-    margin-bottom: 10px; 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.required-star { 
-    color: #ef4444; 
-    margin-left: 2px; 
+.form-group {
+  margin-bottom: 24px;
 }
 
-.form-input, .form-select, .form-textarea { 
-    width: 100%; 
-    padding: 15px 18px; 
-    border: 1px solid var(--border-color); 
-    border-radius: 10px; 
-    font-size: 16px; 
-    outline: none; 
-    transition: all 0.25s; 
+.form-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--color-dark);
 }
 
-.form-input:focus, .form-select:focus, .form-textarea:focus { 
-    border-color: var(--border-focus); 
-    box-shadow: 0 0 0 4px var(--focus-ring); 
+.required-star {
+  color: #EF4444;
 }
 
-.form-row { 
-    display: flex; 
-    gap: 20px; 
+/* INPUTS, SELECT, TEXTAREA */
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-main);
+  border: 2px solid var(--border-stroke);
+  border-radius: 12px;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  outline: none;
+  transition: all 0.2s ease;
 }
 
-.form-row .form-group { 
-    flex: 1; 
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  background: #FFF;
+  border-color: var(--color-purple-dark);
+  box-shadow: 2px 2px 0px var(--border-stroke);
 }
 
-.radio-grid { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 14px; 
+/* RADIO CARDS (OPÇÕES DE PROJETO) */
+.radio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.radio-card { 
-    border: 2px solid var(--border-color); 
-    border-radius: 12px; 
-    padding: 16px 20px; 
-    display: flex; 
-    align-items: center; 
-    gap: 14px; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-    background-color: #fff; 
+.radio-card {
+  background: var(--bg-main);
+  border: 2px solid var(--border-stroke);
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  user-select: none;
 }
 
-.radio-card:hover { 
-    border-color: var(--primary-blue); 
-    background-color: #f8fafc; 
-    transform: translateY(-2px); 
+.radio-card input[type="radio"] {
+  display: none;
 }
 
-.radio-card.selected { 
-    border-color: var(--primary-blue); 
-    background-color: #eff6ff; 
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); 
+.radio-card-title {
+  font-weight: 700;
+  font-size: 0.9rem;
 }
 
-.radio-card input { 
-    accent-color: var(--primary-blue); 
-    width: 18px; 
-    height: 18px; 
+.radio-card:hover {
+  background: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px var(--border-stroke);
 }
 
-.radio-card-title { 
-    font-size: 15px; 
-    font-weight: 600; 
+.radio-card.selected {
+  background: var(--color-lime);
+  border-color: var(--border-stroke);
+  box-shadow: 3px 3px 0px var(--border-stroke);
 }
 
-.radio-card.selected .radio-card-title { 
-    color: var(--primary-blue); 
+/* BOTÃO SUBMIT */
+.btn-submit {
+  width: 100%;
+  background-color: var(--color-purple-dark);
+  color: #FFF;
+  border: 2px solid var(--border-stroke);
+  border-radius: var(--radius-pill);
+  padding: 16px;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-block);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  margin-top: 10px;
 }
 
-.btn-submit { 
-    width: 100%; 
-    background-color: var(--primary-blue); 
-    color: white; 
-    border: none; 
-    padding: 18px; 
-    border-radius: 10px; 
-    font-size: 17px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: all 0.25s; 
-    margin-top: 10px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 10px; 
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); 
+.btn-submit:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-block-hover);
+  background-color: #7C3AED;
 }
 
-.btn-submit:hover { 
-    background-color: var(--primary-blue-hover); 
-    transform: translateY(-2px); 
+.guarantee-badge {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-weight: 600;
 }
 
-.guarantee-badge { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px; 
-    margin-top: 16px; 
-    font-size: 14px; 
-    color: var(--text-muted); 
-    font-weight: 500; 
+/* OVERLAY DE SUCESSO */
+.success-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--card-white);
+  border-radius: var(--radius-card);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  z-index: 10;
 }
 
-.tech-section { 
-    margin-top: 56px; 
-    text-align: center; 
+.success-overlay.active {
+  display: flex;
 }
 
-.tech-title { 
-    font-size: 18px; 
-    font-weight: 700; 
-    margin-bottom: 24px; 
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--color-lime);
+  border: 2px solid var(--border-stroke);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: var(--shadow-block);
+  margin-bottom: 20px;
 }
 
-.tech-pills { 
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 12px; 
+.success-overlay h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-.tech-pill { 
-    background: var(--card-bg); 
-    border: 1px solid var(--border-color); 
-    border-radius: 30px; 
-    padding: 10px 20px; 
-    font-size: 14px; 
-    font-weight: 600; 
-    transition: all 0.2s; 
+.success-overlay p {
+  color: var(--color-muted);
+  margin-bottom: 24px;
 }
 
-.tech-pill:hover { 
-    border-color: var(--primary-blue); 
-    color: var(--primary-blue); 
-    transform: translateY(-2px); 
+.btn-pill-purple {
+  background-color: var(--color-purple-dark);
+  color: #FFF;
+  border: 2px solid var(--border-stroke);
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px var(--border-stroke);
 }
 
-.success-overlay { 
-    display: none; 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    background: rgba(255,255,255,0.98); 
-    border-radius: 20px; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    padding: 30px; 
-    z-index: 10; 
+/* ==========================================================================
+   TICKER TECNOLOGIAS (ANIMADO)
+   ========================================================================== */
+.ticker-section {
+  max-width: 760px;
+  margin: 0 auto 60px;
 }
 
-.success-icon { 
-    width: 70px; 
-    height: 70px; 
-    background: #d1fae5; 
-    color: var(--success-green); 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    margin-bottom: 20px; 
+.ticker-box {
+  background: #FFF;
+  border: 2px solid var(--border-stroke);
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-block);
+  overflow: hidden;
 }
 
-footer { 
-    text-align: center; 
-    padding: 28px; 
-    color: var(--text-muted); 
-    font-size: 14px; 
-    border-top: 1px solid var(--border-color); 
-    margin-top: 70px; 
-    background-color: var(--card-bg); 
+.ticker-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  background: #FFF;
+  z-index: 2;
+  padding-right: 10px;
+  border-right: 2px solid var(--border-stroke);
 }
 
+.ticker-track-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  gap: 12px;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scrollInfinite 18s linear infinite;
+}
+
+.ticker-pill {
+  background: var(--bg-main);
+  border: 1.5px solid var(--border-stroke);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@keyframes scrollInfinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 2px solid var(--border-stroke);
+  background: #FFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    header { padding: 16px 20px; }
-    .nav-links { display: none; }
-    .hero-title { font-size: 30px; }
-    .hero-subtitle { font-size: 15px; }
-    .form-card { padding: 24px 18px; }
-    .form-row { flex-direction: column; gap: 0; }
-    .radio-grid { grid-template-columns: 1fr; gap: 10px; }
+  .form-row, .radio-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .form-card { padding: 24px 16px; }
+  .hero-title { font-size: 2.2rem; }
 }
