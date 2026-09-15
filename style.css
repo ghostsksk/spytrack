@@ -128,21 +128,6 @@ body {
   gap: 40px;
   align-items: center;
 }
-
-.badge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #FFF;
-  border: 1.5px solid var(--border-stroke);
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  box-shadow: 2px 2px 0px var(--border-stroke);
-}
-
 .hero h1 {
   font-family: var(--font-heading);
   font-size: 3.2rem;
