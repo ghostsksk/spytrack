@@ -125,8 +125,6 @@ body {
   padding: 0 24px;
 }
 
-
-
 .hero-title {
   font-family: var(--font-heading);
   font-size: 2.8rem;
@@ -414,10 +412,84 @@ footer {
   font-size: 0.9rem;
 }
 
-/* RESPONSIVIDADE */
+/* ==========================================================================
+   RESPONSIVIDADE E OTIMIZAÇÃO DE ESPAÇOS MOBILE
+   ========================================================================== */
 @media (max-width: 768px) {
-  .form-row, .radio-grid { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  .form-card { padding: 24px 16px; }
-  .hero-title { font-size: 2.2rem; }
+  /* Evita que os blocos encostem nas bordas da tela no celular */
+  body {
+    padding: 0 16px;
+  }
+
+  .header-container {
+    padding: 12px 0;
+  }
+
+  .nav-pill {
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .nav-links {
+    display: none; /* Oculta menu interno para manter o header limpo */
+  }
+
+  .btn-pill-dark {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  /* Ajustes de respiro e preenchimento no formulário */
+  .form-card {
+    padding: 28px 20px; /* Mais espaço interno lateral */
+    margin: 0 auto 40px;
+  }
+
+  .form-row, 
+  .radio-grid {
+    grid-template-columns: 1fr;
+    gap: 16px; /* Aumenta a distância entre opções empilhadas */
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  /* Melhoria de acessibilidade e clique no toque (Touch Targets) */
+  .form-input, 
+  .form-select, 
+  .form-textarea {
+    padding: 16px 18px; /* Mais alto para facilitar o toque */
+    font-size: 1rem; /* Tamanho 16px evita zoom automático no iOS Safari */
+  }
+
+  .radio-card {
+    padding: 16px 18px; /* Área de toque expandida nos cards seletores */
+  }
+
+  .btn-submit {
+    padding: 18px;
+    font-size: 1rem;
+  }
+
+  /* Ajustes finais no Ticker e Footer */
+  .ticker-section {
+    margin-bottom: 40px;
+  }
+
+  .ticker-box {
+    padding: 10px 16px;
+  }
+
+  .ticker-label {
+    font-size: 0.8rem;
+    padding-right: 8px;
+  }
 }
