@@ -14,6 +14,7 @@ let wordIndex = 0, charIndex = 0, isDeleting = false;
 const typedTextSpan = document.getElementById("typed-text");
 
 function typeEffect() {
+    if (!typedTextSpan) return;
     const currentWord = words[wordIndex];
     typedTextSpan.textContent = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
     charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
@@ -30,18 +31,27 @@ function typeEffect() {
     setTimeout(typeEffect, typeSpeed);
 }
 
-document.addEventListener("DOMContentLoaded", typeEffect);
+// Inicialização de eventos quando o DOM estiver pronto
+document.addEventListener("DOMContentLoaded", () => {
+    typeEffect();
+
+    const form = document.getElementById('leadForm');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+});
 
 // Seleção de Cards
 function selectRadioCard(element) {
     document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
     element.classList.add('selected');
-    element.querySelector('input[type="radio"]').checked = true;
+    const radio = element.querySelector('input[type="radio"]');
+    if (radio) radio.checked = true;
 }
 
 // Integração via Fetch para a API FastAPI
 async function handleFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // Impede o envio nativo do formulário
 
     const btn = document.getElementById('btnSubmit');
     const originalBtnContent = btn.innerHTML;
@@ -49,12 +59,14 @@ async function handleFormSubmit(event) {
     btn.style.opacity = '0.7';
     btn.innerHTML = 'Enviando...';
 
+    const radioSelecionado = document.querySelector('input[name="tipo_projeto"]:checked');
+
     // Coleta os dados do formulário
     const payload = {
         nome: document.getElementById('nome').value,
         whatsapp: document.getElementById('whatsapp').value,
         empresa: document.getElementById('empresa').value || null,
-        tipo_projeto: document.querySelector('input[name="tipo_projeto"]:checked').value,
+        tipo_projeto: radioSelecionado ? radioSelecionado.value : "",
         prazo: document.getElementById('prazo').value,
         detalhes: document.getElementById('detalhes').value || null
     };
