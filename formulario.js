@@ -60,7 +60,7 @@ async function handleFormSubmit(event) {
     };
 
     try {
-        const response = await fetch('https://spyjk.top:8080/leads', {
+        const response = await fetch('https://spyjk.top:8090/leads', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
